@@ -8,7 +8,7 @@ class Vehicle(models.Model):
     model = models.CharField(max_length=64)
     vehicle_type = models.CharField(max_length=64)
     prop_orientation = models.CharField(max_length=64)
-    notes = models.CharField(max_length=64)
+    notes = models.CharField(max_length=64, blank=True)
 
 
     def __str__(self):
