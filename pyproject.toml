@@ -9,6 +9,7 @@ python = "^3.8"
 jupyterlab = "^3.0.12"
 pandas = "^1.2.3"
 django = "^3.2"
+django-environ = "^0.4.5"
 
 [tool.poetry.dev-dependencies]
 
