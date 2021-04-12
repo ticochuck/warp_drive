@@ -6,5 +6,5 @@ from django.urls import reverse_lazy
 from .models import Vehicle
 
 class HomePageView(ListView):
-    template_name = 'home.html'
-    model = Records
+    template_name = 'propellers/home.html'
+    model = Vehicle

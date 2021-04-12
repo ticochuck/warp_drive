@@ -6,7 +6,7 @@
   <div>
     <h1 class="content text-center mb-4">Warp Drive Home!</h1>
 
-    {% if user.is_authenticated %}
+    {% comment %} {% if user.is_authenticated %}
     <p class="welcome-text">
       What Propeller do I need for my vehicle?
     </p>
@@ -14,7 +14,7 @@
     <p class="welcome-text">
       This app helps you find the absolute cheapest tickets within the specified date range and (optional) desired stay duration. So far it's working only with <a href="https://www.condor.com/us">Condor Airlines</a>. You need to be logged in to use the app, so please proceed to <a href="{% url 'login' %}">login page</a> to start. If you don't have an account yet, please <a href="{% url 'register' %}">register</a>.
     </p>
-    {% endif %}
+    {% endif %} {% endcomment %}
   </div>
 </div>
 {% endblock content %}
