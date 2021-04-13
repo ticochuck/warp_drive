@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'propellers.apps.PropellersConfig',
+    'import_export',
 ]
 
 MIDDLEWARE = [
