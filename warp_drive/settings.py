@@ -130,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'albums/static',
+    BASE_DIR / 'propellers/static',
 ]
 
 STATIC_ROOT = 'staticfiles'

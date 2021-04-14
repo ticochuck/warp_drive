@@ -19,4 +19,17 @@ class Vehicle(models.Model):
     
 
 class Engine(models.Model):
-    
+    name = models.CharField(max_length=64)
+    manufacturer = models.CharField(max_length=64)
+    model = models.CharField(max_length=64)
+    notes = models.CharField(max_length=64, blank=True)
+
+
+    def __str__(self):
+        return f'{self.name}, {self.manufacturer}, {self.model}'
+
+
+    def get_absolute_url(self):
+        return reverse('home')
+
+
