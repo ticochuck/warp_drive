@@ -14,7 +14,9 @@ class Vehicle(models.Model):
         return f'{self.name}, {self.manufacturer}, {self.model}'
 
 
-    # def get_absolute_url(self):
-    #     return reverse('home')
+    def get_absolute_url(self):
+        return reverse('home')
     
 
+class Engine(models.Model):
+    
