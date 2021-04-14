@@ -2,16 +2,15 @@
 {% load static %}
 
 {% block content %}
-<div class="white-background d-flex align-items-center justify-content-center border border-light animated bounceInDown p-3 m-4" >
+<div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
   <div>
     <h1 class="content text-center mb-4">Warp Drive Home!</h1>
-    <img 
+    
+    <a href="{% url 'vehicles' %}"><button type="button" class="btn btn-danger">Vehicles</button></a>
 
-    <h2>Your Vehicles</h2>
-    <ul>
-      {% for vehicle in object_list %}
-        <li>Velicle ID: {{vehicle.name}}</li>
-      {% endfor %}
+    <a href="{% url 'vehicles' %}"><button type="button" class="btn btn-danger">Engines</button></a>
+    
+    
     </ul>
   </div>
 </div>

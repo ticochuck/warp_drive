@@ -50,5 +50,10 @@ class HomePageView(ListView):
 
 
 class VehiclePageView(ListView):
-    template_name = 'propellers/vehicle.html'
+    template_name = 'propellers/vehicles.html'
+    model = Vehicle
+
+
+class EnginePageView(ListView):
+    template_name = 'propellers/engines.html'
     model = Vehicle
