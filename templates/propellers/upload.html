@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% if messages %}
+{% block content %}
+  <h2>Upload</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload file</button>
+  </form>
+{% endblock %}
+
+
+{% comment %} {% if messages %}
   {% for message in messages %}
   <div class="alert alert-{{ message.tags }}" role="alert">
     {% if message.tags %} <
@@ -15,8 +25,8 @@
   {% crsf_token %}
   <inppload CSV file {% endcomment %}
 
- <form method="post" enctype="multipart/form-data">
+ {% comment %} <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="myfile">
     <button type="submit">Upload</button>
-  </form>
+  </form> {% endcomment %} 
