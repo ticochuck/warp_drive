@@ -5,24 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
-from tablib import Dataset
-
-from .import_data import VehicleResource
 from .models import Vehicle
-from django.core.files.storage import FileSystemStorage
 
-class Home(TemplateView):
-    template_name = 'propellers/home.html'
-
-
-def upload(request):
-    if request.method == "POST":
-        uploaded_file = request.FILES['document'] #document needs to be same as name in html input in upload.html
-        print(uploaded_file.name)
-        print(uploaded_file.size)
-        fs = FileSystemStorage()
-        fs.save(uploaded_file.name, uploaded_file)
-    return render(request, 'propellers/upload.html')
 
 def simple_upload(request):
     if request.method == 'POST':
@@ -35,8 +19,18 @@ def simple_upload(request):
             return render(request, 'propellers/upload.html')
 
         imported_data = dataset.load(new_vehicle.read(), format='xlsx')
-        
+        # print(imported_data)
         for data in imported_data:
+            # print('data es:', data)
+            # name = Vehicle(data[1])
+            # manufacturer = Vehicle(data[2])
+            # model = Vehicle(data[3])
+            # vehicle_type = Vehicle(data[4])
+            # prop_orientation = Vehicle(data[5])
+            # notes = Vehicle(data[6])
+
+            # print('hola: ', name, manufacturer, model)
+
             value = Vehicle(
                 data[0],
                 data[1],
@@ -46,9 +40,15 @@ def simple_upload(request):
                 data[5],
                 data[6]
             )
+            print(value)
             value.save()
     return render(request, 'propellers/upload.html')
 
 class HomePageView(ListView):
     template_name = 'propellers/home.html'
+    model = Vehicle
+
+
+class VehiclePageView(ListView):
+    template_name = 'propellers/vehicle.html'
     model = Vehicle

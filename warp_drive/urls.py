@@ -23,7 +23,7 @@ from propellers import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('propellers.urls')),
-    path('upload/', views.upload, name='upload')
+    # path('upload/', views.simple_upload, name='upload')
 ]
 
 if settings.DEBUG:
