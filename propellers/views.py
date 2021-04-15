@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 
-from .models import Engine, Vehicle
+from .models import Engine, Vehicle, Propeller
 
 
 def simple_upload(request):
@@ -61,5 +61,5 @@ class EnginePageView(ListView):
 
 
 class PropellerPageView(ListView):
-    template_name = 'propellers/propeller.html'
+    template_name = 'propellers/propellers.html'
     model = Propeller

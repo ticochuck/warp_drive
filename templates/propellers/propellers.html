@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="white-background d-flex align-items-center justify-content-center border border-light animated bounceInDown p-3 m-4" >
+  <div>
+    <h1 class="content text-center mb-4">Propellers Page - Warp Drive!</h1>
+
+    <h2>Your Propellers</h2>
+    <ul>
+      {% for propeller in object_list %}
+        <li>Propeller _D: {{propeller.name}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock content %}
+
