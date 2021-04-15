@@ -58,3 +58,8 @@ class VehiclePageView(ListView):
 class EnginePageView(ListView):
     template_name = 'propellers/engines.html'
     model = Engine
+
+
+class PropellerPageView(ListView):
+    template_name = 'propellers/propeller.html'
+    model = Propeller
