@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportActionModelAdmin
 
-from .models import Vehicle, Engine
+from .models import Vehicle, Engine, Propeller
 
 @admin.register(Vehicle)
 class VehicleAdmin(ImportExportActionModelAdmin):
@@ -11,3 +11,8 @@ class VehicleAdmin(ImportExportActionModelAdmin):
 @admin.register(Engine)
 class EngineAdmin(ImportExportActionModelAdmin):
     list_display = ('name', 'manufacturer', 'model', 'notes')
+
+
+@admin.register(Propeller)
+class PropellerAdmin(ImportExportActionModelAdmin):
+    list_display = ('name', 'vehicle_id', 'engine_id')
