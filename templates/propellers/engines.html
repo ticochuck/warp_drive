@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="white-background d-flex align-items-center justify-content-center border border-light animated bounceInDown p-3 m-4" >
+<div class="white-background d-flex align-items-center justify-content-center border border-light p-3 m-4" >
   <div>
     <h1 class="content text-center mb-4">Engines Page - Warp Drive!</h1>
 
@@ -12,6 +12,7 @@
         <li>Engine ID: {{engine.name}}</li>
       {% endfor %}
     </ul>
+    <a style="color:white" href="{% url 'home' %}"><button type="button" class="btn" style="background-color: #C61C22">Home Page</button></a>
   </div>
 </div>
 {% endblock content %}
