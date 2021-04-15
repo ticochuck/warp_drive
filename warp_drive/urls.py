@@ -20,10 +20,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 from propellers import views
+from csvs import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('propellers.urls'))
+    path('', include('propellers.urls')),
+    path('csvs/', include('csvs.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

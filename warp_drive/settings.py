@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'propellers.apps.PropellersConfig',
+    'csvs.apps.CsvsConfig',
     'import_export',
 ]
 
@@ -146,4 +147,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'propellers/static')
 
 MEDIA_URL = '/media/'
 
-#
