@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'propellers.apps.PropellersConfig',
+    'csvs.apps.CsvsConfig',
     'import_export',
 ]
 
