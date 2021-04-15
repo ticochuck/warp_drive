@@ -147,4 +147,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'propellers/static')
 
 MEDIA_URL = '/media/'
 
-#

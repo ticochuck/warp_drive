@@ -25,7 +25,7 @@ from csvs import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('propellers.urls')),
-    path('csvs/', include('csvs.urls', namespace='csvs')),
+    path('csvs/', include('csvs.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
