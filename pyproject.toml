@@ -11,6 +11,7 @@ pandas = "^1.2.3"
 django = "^3.2"
 django-environ = "^0.4.5"
 django-import-export = "^2.5.0"
+django-crispy-forms = "^1.11.2"
 
 [tool.poetry.dev-dependencies]
 
