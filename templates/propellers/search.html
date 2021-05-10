@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
+  <div>
+    <h1 class="content text-center mb-4">Search Propellers!</h1>
+    
+    <a style="color:white" href="{% url 'propellers' %}"><button type="button" class="btn" style="background-color: #C61C22">Search</button></a>
+
+  </div>
+</div>
+{% endblock content %}
