@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'propellers.apps.PropellersConfig',
     'csvs.apps.CsvsConfig',
     'import_export',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
+# crispy form template-pack
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

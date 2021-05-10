@@ -9,7 +9,7 @@ class Csv(models.Model):
     
 
     def __str__(self):
-        return f'File id: {self.id}'
+        return f'File id: {self.id}, File Name: {self.file_name}'
     
 
     def get_absolute_url(self):
