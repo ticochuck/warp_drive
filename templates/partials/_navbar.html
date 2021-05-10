@@ -1,13 +1,5 @@
 {% load static %}
 
-{% comment %} <nav class="navbar sticky-top navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/main_image.png' %}" alt="main_logo"></a>
-
-  </div>
-</nav> {% endcomment %}
-
-{% comment %} style="background-color: #54595F" {% endcomment %}
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg special-color-dark">
   <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/main_image.png' %}" alt="main_logo"></a>
@@ -22,7 +14,7 @@
           active
         {% endif %}
       ">
-        <a class="text-white font-weight-bold h2 mr-3 text-decoration-none" href="{% url 'home' %}"><i class="fas fa-home"></i> Warp Drive
+        <a class="text-white font-weight-bold h2 mr-3 text-decoration-none" href="{% url 'home' %}"> Databases
           <span class="sr-only">(current)</span>
         </a>
       </li>
