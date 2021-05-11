@@ -9,3 +9,10 @@ class CsvModelForm(forms.ModelForm):
         model = Csv
         fields = ('file_name',)
         labels = {'Import CSV File here'}
+
+
+class PropellerCsvModelForm(forms.ModelForm):
+    class Meta:
+        model = Csv
+        fields = ('file_name',)
+        labels = {'Import CSV File here'}
