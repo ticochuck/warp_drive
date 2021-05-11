@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
 <div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
   <div>
-    <h1 class="content text-center mb-4">Search Propellers!</h1>
+    <h1 class="content text-center mb-4">Search Propellers</h1>
     
-    <a style="color:white" href="{% url 'propellers' %}"><button type="button" class="btn" style="background-color: #C61C22">Search</button></a>
+    <div class="border border-light p-3 white-background">
+      <form method="post" class="content text-center">
+        {% csrf_token %}
+        <fieldset class="text-primary">
+          {{ form|crispy }}
+        </fieldset>
+
+        <button id="search_submit" type="submit" class="btn btn-primary darken-1">
+          Search
+        </button>
+      </form>
+    </div>
 
   </div>
+  {% if context %}
+    <p>{context}</p>
+  {% endif %}
 </div>
 {% endblock content %}
