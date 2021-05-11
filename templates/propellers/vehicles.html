@@ -4,15 +4,21 @@
 {% block content %}
 <div class="white-background d-flex align-items-center justify-content-center border border-light p-3 m-4" >
   <div>
-    <h1 class="content text-center mb-4">Vehicles Page - Warp Drive!</h1>
-
-    <h2>Your Vehicles</h2>
-    <ul>
-      {% for vehicle in object_list %}
-        <li>Velicle ID: {{vehicle.name}}</li>
-      {% endfor %}
-    </ul>
+    <h1 class="content text-center mb-4">Vehicles Table</h1>
+    {% if object_list %}
+      <h2>Your Vehicles</h2>
+      <ul>
+        {% for vehicle in object_list %}
+          <li>Velicle ID: {{vehicle.name}}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <h3>The table is empty</h3>
+    {% endif %}
     <a style="color:white" href="{% url 'home' %}"><button type="button" class="btn" style="background-color: #C61C22">Home Page</button></a>
+
+    <a style="color:white" href="{% url 'upload' %}"><button type="button" class="btn" style="background-color: #C61C22">Import Vehicles</button></a>    
+
   </div>
 </div>
 {% endblock content %}
