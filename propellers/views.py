@@ -52,9 +52,9 @@ def search(request):
         #         print(result)
             
         context = {
-            'results': 'results'
+            'results': results
         }
-        return redirect('home')
+        return render(request, 'propellers/results.html', context)
 
     else:
         form = SearchPropeller()
