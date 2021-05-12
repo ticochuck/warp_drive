@@ -32,7 +32,14 @@ def search(request):
     if request.method == 'POST':
         form = SearchPropeller(request.POST)
 
-        return redirect('search')
+        if form.is_valid():
+            engine = request.POST.get('engine_id')
+            vehicle = request.POST.get('vehicle_id')
+            reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
+
+            
+
+        return redirect('results')
 
     else:
         form = SearchPropeller()

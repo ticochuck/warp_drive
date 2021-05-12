@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
+  <div>
+    <h1 class="content text-center mb-4">Results</h1>
+    
+    {% for result in results %}
+      
+    {% endfor %}
+
+  </div>
+  {% if context %}
+    <p>{context}</p>
+  {% endif %}
+</div>
+{% endblock content %}
