@@ -3,19 +3,43 @@
 {% load static %}
 
 {% block content %}
-<div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
-  <div>
-    <h1 class="content text-center mb-4">Results</h1>
+  <h1 class="content text-center mb-4">Results</h1>
+  
     
-    {% for result in results %}
-      <ul>
-        <li>{{ result }}</li>
-      </ul>
-    {% endfor %}
+  {% if results%}
+    <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
 
-  </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Vehicle ID</th>
+          <th scope="col">Engine ID</th>
+          <th scope="col">Reduction Rate</th>
+          <th scope="col">Rotation</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for propeller in results %}
+          <tr>
+            <th scope="row">
+                <span>{{ propeller.name }}</span>
+            </th>
+            <td>{{ propeller.vehicle_id }}</a></td>
+            <td>{{ propeller.engine_id }}</th>
+            <td>{{ propeller.reduction_ratio_rename_to_red_drive_name }}</th>
+            <td>{{ propeller.rotation }}</th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <h1>No results found. Please try searching with different criteria</h1>
+    <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
+  {% endif %}
+  
   {% if context %}
     <p>{context}</p>
   {% endif %}
-</div>
+
 {% endblock content %}

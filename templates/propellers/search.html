@@ -10,12 +10,12 @@
     <div class="border border-light p-3 white-background">
       <form method="post" class="content text-center">
         {% csrf_token %}
-        <fieldset class="text-primary">
+        <fieldset class="text-dark ">
           {{ form|crispy }}
         </fieldset>
 
-        <button id="search_submit" type="submit" class="btn btn-primary darken-1">
-          Search
+        <button id="search_submit" type="submit" class="btn" style="background-color: #C61C22">
+          <span style="color:white" >Search</span>
         </button>
       </form>
     </div>
