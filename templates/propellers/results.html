@@ -2,37 +2,42 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block link %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/b-colvis-1.6.3/b-html5-1.6.3/cr-1.5.2/sc-2.0.2/sp-1.1.1/datatables.min.css"/>
+{% endblock link %}
+
 {% block content %}
   <h1 class="content text-center mb-4">Results</h1>
   
     
   {% if results%}
     <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Vehicle ID</th>
-          <th scope="col">Engine ID</th>
-          <th scope="col">Reduction Rate</th>
-          <th scope="col">Rotation</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for propeller in results %}
+    <div class="table-responsive">
+      <table id="result" class="table table-hover white-background">
+        <thead>
           <tr>
-            <th scope="row">
-                <span>{{ propeller.name }}</span>
-            </th>
-            <td>{{ propeller.vehicle_id }}</a></td>
-            <td>{{ propeller.engine_id }}</th>
-            <td>{{ propeller.reduction_ratio_rename_to_red_drive_name }}</th>
-            <td>{{ propeller.rotation }}</th>
+            <th scope="col">Name</th>
+            <th scope="col">Vehicle ID</th>
+            <th scope="col">Engine ID</th>
+            <th scope="col">Reduction Rate</th>
+            <th scope="col">Rotation</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </thead>
+        <tbody id="table-body">
+          {% for propeller in results %}
+            <tr>
+              <th class="align-middle" scope="row">
+                  <span>{{ propeller.name }}</span>
+              </th>
+              <td class="align-middle">{{ propeller.vehicle_id }}</a></td>
+              <td class="align-middle">{{ propeller.engine_id }}</th>
+              <td class="align-middle">{{ propeller.reduction_ratio_rename_to_red_drive_name }}</th>
+              <td class="align-middle">{{ propeller.rotation }}</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
     <h1>No results found. Please try searching with different criteria</h1>
     <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
@@ -43,3 +48,8 @@
   {% endif %}
 
 {% endblock content %}
+
+{% block script %}
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/b-colvis-1.6.3/b-html5-1.6.3/cr-1.5.2/sc-2.0.2/sp-1.1.1/datatables.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/results.js' %}"></script>
+{% endblock script %}
