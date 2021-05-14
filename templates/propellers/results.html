@@ -11,7 +11,10 @@
   
     
   {% if results%}
-    <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
+    <div>
+      <p>Results found are listed below. To perform a new search click <a href="{% url 'search' %}"><b>here</b></a>
+      </p>
+    </div>
     <div class="table-responsive">
       <table id="result" class="table table-hover white-background">
         <thead>
@@ -39,7 +42,7 @@
       </table>
     </div>
   {% else %}
-    <h1>No results found. Please try searching with different criteria</h1>
+    <p>No results found. Please try searching with different criteria</p>
     <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
   {% endif %}
   
