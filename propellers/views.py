@@ -1,4 +1,6 @@
-import requests
+import pandas as pd
+import matplotlib.pyplot as plt
+
 from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
@@ -64,20 +66,14 @@ def search(request):
             elif reduction_rate:
                 results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
 
-            # elif vehicle != '' or vehicle != None:
-            #     results = Propeller.filter(vehicle_id = vehicle)
+            df = pd.DataFrame(results)
 
-            # results = Propeller.objects.all().filter(engine_id = request.POST.get('engine_id'))
-            # results = results.filter(vehicle_id = request.POST.get('vehicle_id'))
-            # print(results)
-        # database_info = Propeller.objects.all()
-        # for result in database_info:
-        #     if result.engine_id == engine and result.vehicle_id == vehicle:
-        #         counter += 1
-        #         print(result.name, counter)
+            df = df.head()
+            
 
         context = {
-            'results': results
+            'results': results,
+            'df': df
         }
         return render(request, 'propellers/results.html', context)
 

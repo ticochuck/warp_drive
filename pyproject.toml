@@ -12,6 +12,7 @@ django = "^3.2"
 django-environ = "^0.4.5"
 django-import-export = "^2.5.0"
 django-crispy-forms = "^1.11.2"
+matplotlib = "^3.4.2"
 
 [tool.poetry.dev-dependencies]
 
