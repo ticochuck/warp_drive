@@ -208,8 +208,20 @@ Django = ">=2.0"
 diff-match-patch = "*"
 
 [package.dependencies.tablib]
-extras = ["xls", "yaml", "html", "xlsx", "ods"]
+extras = ["html", "xlsx", "ods", "yaml", "xls"]
 version = ">=0.14.0"
+
+[[package]]
+category = "main"
+description = "Tools for working with pydata.pandas in your Django projects"
+name = "django-pandas"
+optional = false
+python-versions = "*"
+version = "0.6.4"
+
+[package.dependencies]
+pandas = ">=0.14.1"
+six = ">=1.15.0"
 
 [[package]]
 category = "main"
@@ -1054,7 +1066,7 @@ python-versions = "*"
 version = "1.3.0"
 
 [metadata]
-content-hash = "68230c0d6d289581f5ee91923d5ff71a131ef6b7e69f0af2016c3e1d785eb2c7"
+content-hash = "3376862db519e452422841036e0833a92a97357b8b579b5e558cb7af8ecf7916"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -1182,6 +1194,10 @@ django-environ = [
 django-import-export = [
     {file = "django-import-export-2.5.0.tar.gz", hash = "sha256:c39c003bfc803fb63ba7742562f1667603a4a8d7426261845d75ce8582d40f48"},
     {file = "django_import_export-2.5.0-py3-none-any.whl", hash = "sha256:cf6f3dabdd4f32dcb26e25c7ddcba7aee3168b55d380b0da79f0349afa17c011"},
+]
+django-pandas = [
+    {file = "django-pandas-0.6.4.tar.gz", hash = "sha256:a1b5d300112a09625926a5756aa72bbe8918fb95b9c4ec39b3a06f03e0e336f9"},
+    {file = "django_pandas-0.6.4-py3-none-any.whl", hash = "sha256:ccb3c5b9e201515c5247266227b22d7307a1e3f8b1c02c3844a985f367b8f199"},
 ]
 entrypoints = [
     {file = "entrypoints-0.3-py2.py3-none-any.whl", hash = "sha256:589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19"},
