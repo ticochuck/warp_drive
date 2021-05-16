@@ -46,8 +46,11 @@
     <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
   {% endif %}
 
-  <h1> Aqui MCE </h1>
-  <p> {{ df }} </p>
+  <h1> Some Stats </h1>
+  <p> Most common engines: {{ most_common_engines }} </p>
+  {% comment %} {% for engine in most_common_engines %}
+    <p> Most common engines: {{ engine }} </p>
+  {% endfor %} {% endcomment %}
   
   
   
