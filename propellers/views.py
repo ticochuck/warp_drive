@@ -1,3 +1,4 @@
+import itertools
 import pandas as pd
 from django_pandas.io import read_frame
 import matplotlib.pyplot as plt
@@ -67,19 +68,23 @@ def search(request):
             elif reduction_rate:
                 results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
 
-            # df = pd.DataFrame(results)
-
-            # df = df['engine_id'].value_counts().head(5)
-
-            
+            # create DataFrame
             qs = read_frame(results)
 
-            most_common_engines = qs['engine_id'].value_counts().head(5)
-            print(most_common_engines)
+            # get top 5 most common engines
+            most_common_engines_names = qs['engine_id'].value_counts()[:5].index.tolist()
+            # print(most_common_engines)
+            most_common_engines_totals = qs['engine_id'].value_counts()[:5].tolist()
+            print(most_common_engines_totals)
             
+            most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(5)
+
+                      
         context = {
             'results': results,
-            'most_common_engines': most_common_engines
+            'most_common_engines_names': most_common_engines_names,
+            'most_common_engines_totals': most_common_engines_totals,
+            'most_common_red_rates': most_common_red_rates,
         }
         return render(request, 'propellers/results.html', context)
 

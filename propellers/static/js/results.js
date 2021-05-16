@@ -7,7 +7,7 @@ $(() => {
     searching: true,
     scrollX: true,
     scrollCollapse: false,
-    iDisplayLength: 25,
+    iDisplayLength: 10,
     order: [[0, "desc"]],
   });
 });

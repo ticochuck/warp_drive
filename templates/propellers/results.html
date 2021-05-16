@@ -47,13 +47,26 @@
   {% endif %}
 
   <h1> Some Stats </h1>
-  <p> Most common engines: {{ most_common_engines }} </p>
-  {% comment %} {% for engine in most_common_engines %}
-    <p> Most common engines: {{ engine }} </p>
-  {% endfor %} {% endcomment %}
+  {% comment %} <p> Most common reduction rates: {{ most_common_red_rates }} </p> {% endcomment %}
   
+  <p> Most common engines: </p>
   
-  
+  <table class="table table-hover white-background">
+    <thead>
+      <tr>
+        {% for engine in most_common_engines_names %}
+        <th scope="col"> {{ engine }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for engine in most_common_engines_totals %}
+          <td class="align-middle"> {{ engine }} </td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
   
   {% if context %}
     <p>{context}</p>
