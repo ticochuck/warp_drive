@@ -75,11 +75,15 @@ def search(request):
             qs = read_frame(results)
 
             most_common_engines = qs['engine_id'].value_counts().head(5)
-            print(most_common_engines)
+            print('mce', most_common_engines)
+
+            most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(5)
+            print('mcrr', most_common_red_rates)
             
         context = {
             'results': results,
-            'most_common_engines': most_common_engines
+            'most_common_engines': most_common_engines,
+            'most_common_red_rates': most_common_red_rates
         }
         return render(request, 'propellers/results.html', context)
 
