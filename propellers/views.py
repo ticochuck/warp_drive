@@ -74,12 +74,12 @@ def search(request):
             
             qs = read_frame(results)
 
-            mce = qs['engine_id'].value_counts()
-            print(mce)
-
+            most_common_engines = qs['engine_id'].value_counts().head(5)
+            print(most_common_engines)
+            
         context = {
             'results': results,
-            'df': mce
+            'most_common_engines': most_common_engines
         }
         return render(request, 'propellers/results.html', context)
 
