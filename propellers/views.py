@@ -35,7 +35,7 @@ def search(request):
 
     if request.method == 'POST':
         form = SearchPropeller(request.POST)
-        counter = 0
+        
         if form.is_valid():
             if request.POST.get('engine_id') != '' or request.POST.get('engine_id') != None: 
                 engine = request.POST.get('engine_id')
@@ -79,12 +79,16 @@ def search(request):
             
             most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(5)
 
-                      
+            qs2 = results.values()
+            data = pd.DataFrame(qs2).head(5)
+            
+
         context = {
             'results': results,
             'most_common_engines_names': most_common_engines_names,
             'most_common_engines_totals': most_common_engines_totals,
             'most_common_red_rates': most_common_red_rates,
+            'df': data.to_html()
         }
         return render(request, 'propellers/results.html', context)
 
@@ -94,5 +98,19 @@ def search(request):
     context = {
         'form': form,
     }
-
+    
+    
     return render(request, 'propellers/search.html', context)
+
+
+def overall_stats(request):
+    qs = Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values()
+    data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
+    
+    context = {
+        'df': data.to_html()
+    }
+
+    return render(request, 'propellers/overall_stats.html', context)
+    
+

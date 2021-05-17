@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/b-colvis-1.6.3/b-html5-1.6.3/cr-1.5.2/sc-2.0.2/sp-1.1.1/datatables.min.css"/>
+{% endblock link %}
+
+{% block content %}
+  <h1 class="content text-center mb-4">Overall Stats</h1>
+  
+    
+  <div>
+    <p>This information is based on all data within Propellers Database. To search for data using specific criteria click <a href="{% url 'search' %}"><b>here</b></a>
+    </p>
+  </div>
+  
+  {{ df | safe }}
+  <hr>
+  
+    
+{% endblock content %}
+
+{% block script %}
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/b-colvis-1.6.3/b-html5-1.6.3/cr-1.5.2/sc-2.0.2/sp-1.1.1/datatables.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/results.js' %}"></script>
+{% endblock script %}
