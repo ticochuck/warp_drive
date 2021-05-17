@@ -67,10 +67,14 @@
       </tr>
     </tbody>
   </table>
+
+  <h1>TEST NEW DF</h1>
+  {{ df | safe }}
   
+{% comment %}   
   {% if context %}
     <p>{context}</p>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
 {% endblock content %}
 
