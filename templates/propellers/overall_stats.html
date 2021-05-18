@@ -10,39 +10,26 @@
   <h1 class="content text-center mb-4">Overall Stats</h1>
   
     
-  <div>
-    <p>This information is based on all data within Propellers Database. To search for data using specific criteria click <a href="{% url 'search' %}"><b>here</b></a>
-    </p>
-  </div>
-  
-  {% comment %} {{ df | safe }} {% endcomment %}
-  <hr>
   
   <h1>Top engines</h1>
   
   {{ d }}
 
-  <p>gp</p>
-    {% comment %} {% for thing in gp %}
-      <p>{{ thing }}</p>
+  <hr>
 
-    {% endfor %} {% endcomment %}
+  {% comment %} {% if chart %} {% endcomment %}
+    <p>Hola</p>
+    <img src="data:image/png;base64, {{ chart | safe }}">
+  {% comment %} {% endif %} {% endcomment %}
   
-    {% comment %} {{ d3 }} {% endcomment %}
+  <hr>
   
-  <h1>Top engines2</h1>
-  <p>.todict()</p>
+  <div>
+    <p>This information is based on all data within Propellers Database. To search for data using specific criteria click <a href="{% url 'search' %}"><b>here</b></a>
+    </p>
+  </div>
+  {{ df | safe }}
   
-    {% comment %} {{ d4 }}
-   {% endcomment %}
-  {% comment %} {% for kv in d4 %} {% endcomment %}
-    {% comment %} {% if engine[0] == '' %} {% endcomment %}
-      {% comment %} <p> empty , {{ engine.values }}</p>   {% endcomment %}
-    {% comment %} {% else %}  {% endcomment %}
-      {% comment %} <p> {{ data2}} </p> {% endcomment %}
-    {% comment %} {% endif %} {% endcomment %}
-  {% comment %} {% endfor %} {% endcomment %}
-
     
 {% endblock content %}
 

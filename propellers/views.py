@@ -1,15 +1,17 @@
+from base64 import encode
 import itertools
-import pandas as pd
-from django_pandas.io import read_frame
-import matplotlib.pyplot as plt
 
+import matplotlib.pyplot as plt
+import pandas as pd
 from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
+from django_pandas.io import read_frame
 from pandas.core import groupby
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
+from .plots import get_plot
 
 
 class HomePageView(ListView):
@@ -117,24 +119,33 @@ def overall_stats(request):
     d = data2.groupby('engine_id')['reduction_ratio_rename_to_red_drive_name'].count().sort_values(ascending=False).head(10)
     print('d', d)
     data2 = data2['engine_id'].value_counts().head(10)
+       
+    # ts = Propeller.objects.all().filter(vehicle_id = 'un-Gyro')
+    ts = Engine.objects.all()
+    x = [x.name for x in ts]
+    y = [y.model for y in ts]
+    chart = get_plot(x, y)
 
-    groupby_red_rate = data.groupby('engine_id').count()
-    # print(groupby_red_rate.head(5))
-    # print('grop1',type(groupby_red_rate))   
- 
-    test = pd.DataFrame(data).groupby('engine_id')['reduction_ratio_rename_to_red_drive_name'].count()
-    # print('test', type(test))
-    
     context = {
         'df': data.to_html(),
         'data2': data2,
-        'gp': groupby_red_rate,
-        'd': d
-        # 'd3': d3.to_dict(),
-        # 'd4': d3.to_dict()
+        'd': d,
+        'chart': chart
     }
 
     
     return render(request, 'propellers/overall_stats.html', context)
     
 
+# def main_graph(request):
+#     qs = Propeller.objects.all().filter(vehicle_id = 'un-Gyro')
+#     x = [x.engine_id for x in qs]
+#     y = [y.reduction_ratio_rename_to_red_drive_name for y in qs]
+#     chart = get_plot(x, y)
+
+#     context = {
+#         'chart': chart
+#     }
+    
+#     return render(request, 'propellers/overall_stats.html', context)
+ 
