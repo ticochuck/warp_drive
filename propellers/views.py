@@ -27,10 +27,6 @@ def home(request):
 
     return render(request, 'propellers/home.html', context)
 
-class HomePageView(ListView):
-    template_name = 'propellers/home.html'
-    model = Vehicle
-
 
 class VehiclePageView(ListView):
     template_name = 'propellers/vehicles.html'
@@ -51,7 +47,7 @@ class PropellerPageView(ListView):
 def database_page(request):
 
     context = {
-        'title': 'Propellers - Databases Page'
+        'title': 'Databases'
     }
 
     return render(request, 'propellers/databases.html', context)
@@ -95,9 +91,7 @@ def search(request):
 
             # create DataFrame
             qs = read_frame(results)
-            # print('qs', type(qs))
-            # print('results', type(results))
-
+            
             # get top 5 most common engines
             most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
             
@@ -110,6 +104,7 @@ def search(request):
             data = pd.DataFrame(qs2).head(10)
             
         context = {
+            'title': 'Results',
             'results': results,
             'most_common_engines_names': most_common_engines_names,
             'most_common_engines_totals': most_common_engines_totals,
@@ -122,6 +117,7 @@ def search(request):
         form = SearchPropeller()
 
     context = {
+        'title': 'Search',
         'form': form,
     }
     
@@ -156,6 +152,7 @@ def overall_stats(request):
 
 
     context = {
+        'title': 'Stats',
         'df': data.to_html(),
         'data2': data2,
         'd': d,
