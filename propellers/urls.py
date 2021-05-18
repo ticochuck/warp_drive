@@ -3,10 +3,10 @@ from django.urls import path
 from csvs.views import upload_file_view, upload_propellers
 
 from .views import (EnginePageView, HomePageView, PropellerPageView,
-                    VehiclePageView, database_page, overall_stats, search)
+                    VehiclePageView, database_page, overall_stats, search, home)
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name='home'),
+    path('', home, name='home'),
     path('upload/', upload_file_view, name='upload'),
     path('overall_stats/', overall_stats, name='overall_stats'),
     path('upload_propellers/', upload_propellers, name='upload_propellers'),

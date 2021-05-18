@@ -18,8 +18,14 @@ from pandas.core import groupby
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
 
-# from .plots import get_plot
 
+def home(request):
+    
+    context = {
+        'title': 'Home'
+    }
+
+    return render(request, 'propellers/home.html', context)
 
 class HomePageView(ListView):
     template_name = 'propellers/home.html'

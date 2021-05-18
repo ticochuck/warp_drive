@@ -1,23 +1,13 @@
 {% load static %}
 
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg special-color-dark">
-  <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/propeller.jpg' %}" alt="main_logo" width="45"></a>
+{% comment %} <nav class="mb-1 navbar navbar-expand-lg special-color-dark">
+  <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/main_image.png' %}" alt="main_logo" width="350"></a>
   <button class="navbar-toggler bg-light text-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-    =
+    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item
-        {% if '/' == request.path %}
-          active
-        {% endif %}
-      ">
-        <a class="text-white font-weight-bold h2 mr-3 text-decoration-none" href="{% url 'home' %}"> WARP DRIVE
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
       
       <li class="nav-item">
         <a class="nav-link text-white p-2" href="{% url 'overall_stats' %}"><i class="fas fa-chart-pie"></i></i> Stats
@@ -36,7 +26,75 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
+      
+      <li class="nav-item">
+        <a class="nav-link text-white p-2" href="{% url 'databases' %}"><i class="fab fa-facebook"></i></i> 
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      
     </ul>
   </div>
-</nav>
+</nav> {% endcomment %}
 <!--/.Navbar -->
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'home' %}">
+        <img src="{% static 'img/main_image.png' %}" alt="main_logo" height="15" loading="lazy"/>
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'overall_stats' %}"><i class="fas fa-chart-pie"></i></i> Stats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'search' %}"><i class="fas fa-search"></i> Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'databases' %}"><i class="fas fa-database"></i> Databases</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Icon -->
+      <a class="text-reset me-3" href="#">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+
+      <a class="nav-link p-2" href="https://www.instagram.com/warpdriveprops/" ><i class="fab fa-instagram"></i> 
+          <span class="sr-only">(current)</span>
+      </a>
+      <a class="nav-link p-2" href="{% url 'databases' %}"><i class="fab fa-facebook"></i></i> 
+          <span class="sr-only">(current)</span>
+      </a>
+    
+      
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

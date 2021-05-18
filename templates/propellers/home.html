@@ -2,19 +2,16 @@
 {% load static %}
 
 {% block content %}
-<div class="white-background d-flex align-items-center justify-content-center" >
+<div class="white-background d-flex align-items-center justify-content-center animated p-3 m-4" >
   
   <div>
     <img src="{% static 'img/main_image.png' %}" alt="main_logo">
 
-    <p>App to search propellers based on user input. Provides some basic data analytics.</p>
-    
     <a style="color:white" href="{% url 'overall_stats' %}"><button type="button" class="btn" style="background-color: #C61C22">Stats</button></a>
 
     <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22">Search</button></a>
     
-    <a style="color:white" href="{% url 'databases' %}"><button type="button" class="btn" style="background-color: #C61C22">Databases</button></a>
-        
+    <a style="color:white" href="{% url 'databases' %}"><button type="button" class="btn" style="background-color: #C61C22">Databases</button></a>    
   </div>
 </div>
 {% endblock content %}
