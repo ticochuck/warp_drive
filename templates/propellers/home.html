@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
+<div class="white-background d-flex align-items-center justify-content-center" >
+  
   <div>
     <img src="{% static 'img/main_image.png' %}" alt="main_logo">
 
-    <h1 class="content text-center mb-4">Warp Drive</h1>
     <p>App to search propellers based on user input. Provides some basic data analytics.</p>
     
     <a style="color:white" href="{% url 'overall_stats' %}"><button type="button" class="btn" style="background-color: #C61C22">Stats</button></a>
