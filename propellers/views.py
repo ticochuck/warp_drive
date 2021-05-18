@@ -59,14 +59,14 @@ def search(request):
         
         if form.is_valid():
             if request.POST.get('engine_id') != '' or request.POST.get('engine_id') != None: 
-                engine = request.POST.get('engine_id')
+                engine = request.POST.get('engine_id').lower()
             if request.POST.get('vehicel_id') != '' or request.POST.get('vehicel_id') != None:
-                vehicle = request.POST.get('vehicle_id')
+                vehicle = request.POST.get('vehicle_id').lower()
             if request.POST.get('reduction_ratio_rename_to_red_drive_name') != '' or request.POST.get('reduction_ratio_rename_to_red_drive_name') != None:
-                reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
+                reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name').lower()
             
-            if not engine and not vehicle and not reduction_rate:
-
+            if  engine == '' and vehicle == '' and reduction_rate == '':
+                print('hola here')
                 results = None
                 
                 context = {
@@ -76,7 +76,7 @@ def search(request):
                 
                 return render(request, 'propellers/results.html', context)
 
-            all_info = Propeller.objects.all()
+            all_info = Propeller.objects.all().lower()
             
             results = all_info
 
