@@ -1,6 +1,10 @@
-from base64 import encode
-import itertools
+# import itertools
 
+import matplotlib
+matplotlib.use("Agg")
+
+from io import BytesIO
+import base64 
 import matplotlib.pyplot as plt
 import pandas as pd
 from django.shortcuts import redirect, render
@@ -121,16 +125,23 @@ def overall_stats(request):
     data2 = data2['engine_id'].value_counts().head(10)
        
     # ts = Propeller.objects.all().filter(vehicle_id = 'un-Gyro')
-    ts = Engine.objects.all()
-    x = [x.name for x in ts]
-    y = [y.model for y in ts]
+    ts = Propeller.objects.all().filter(vehicle_id='Wind Ryder Gyro')
+    x = [x.engine_id for x in ts]
+    y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
     chart = get_plot(x, y)
+
+    # trying something
+    buf = BytesIO()
+    plt.savefig(buf, format='png', dpi=100)
+    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+    buf.close()
+
 
     context = {
         'df': data.to_html(),
         'data2': data2,
         'd': d,
-        'chart': chart
+        'chart': image_base64
     }
 
     
