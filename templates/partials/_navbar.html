@@ -1,7 +1,23 @@
 {% load static %}
 
 <!--Navbar -->
-{% comment %} <nav class="mb-1 navbar navbar-expand-lg special-color-dark">
+{% comment %} <nav class="mb-1 navbar navbar-expand-lg special-color-dark"> {% endcomment %}
+{% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent-555"
+      aria-controls="navbarSupportedContent-555"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
   <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/main_image.png' %}" alt="main_logo" width="350"></a>
   <button class="navbar-toggler bg-light text-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
     aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i>
@@ -35,42 +51,45 @@
       
     </ul>
   </div>
-</nav> {% endcomment %}
+  </div>
+  <!-- Container wrapper -->
+</nav>  {% endcomment %}
 <!--/.Navbar -->
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
+    
     <button
       class="navbar-toggler"
       type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent-555"
+      aria-controls="navbarSupportedContent-555"
+      aria-expanded="true"
       aria-label="Toggle navigation"
     >
       <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'home' %}">
-        <img src="{% static 'img/main_image.png' %}" alt="main_logo" height="15" loading="lazy"/>
+        <img src="{% static 'img/main_image.png' %}" alt="main_logo" height="45" loading="lazy"/>
       </a>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'overall_stats' %}"><i class="fas fa-chart-pie"></i></i> Stats</a>
+          <a class="nav-link" style="color: #C61C22" href="{% url 'overall_stats' %}"><i class="fas fa-chart-pie"></i></i> Stats</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'search' %}"><i class="fas fa-search"></i> Search</a>
+          <a class="nav-link" style="color: #C61C22" href="{% url 'search' %}"><i class="fas fa-search"></i> Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'databases' %}"><i class="fas fa-database"></i> Databases</a>
+          <a class="nav-link" style="color: #C61C22" href="{% url 'databases' %}"><i class="fas fa-database"></i> Databases</a>
         </li>
       </ul>
       <!-- Left links -->
@@ -79,15 +98,13 @@
 
     <!-- Right elements -->
     <div class="d-flex align-items-center">
-      <!-- Icon -->
-      <a class="text-reset me-3" href="#">
-        <i class="fas fa-shopping-cart"></i>
-      </a>
-
-      <a class="nav-link p-2" href="https://www.instagram.com/warpdriveprops/" ><i class="fab fa-instagram"></i> 
+      <a class="nav-link p-2 " target="_blank" href="https://www.youtube.com/user/WarpDriveInc" ><i class="fab fa-youtube"></i> 
           <span class="sr-only">(current)</span>
       </a>
-      <a class="nav-link p-2" href="{% url 'databases' %}"><i class="fab fa-facebook"></i></i> 
+      <a class="nav-link p-2" target="_blank" href="https://www.instagram.com/warpdriveprops/" ><i class="fab fa-instagram"></i> 
+          <span class="sr-only">(current)</span>
+      </a>
+      <a class="nav-link p-2" target="_blank" href="https://www.facebook.com/WarpDriveProps/"><i class="fab fa-facebook"></i></i> 
           <span class="sr-only">(current)</span>
       </a>
     
