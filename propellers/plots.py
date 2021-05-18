@@ -10,7 +10,7 @@ def get_graph():
     buffer.seek(0)
     image_png = buffer.getvalue()
     graph = base64.b64decode(image_png)
-    graph = graph.decode('ISO-8859-1')
+    graph = graph.decode('utf-8')
     buffer.close()
 
 
