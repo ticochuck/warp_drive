@@ -18,12 +18,14 @@ from pandas.core import groupby
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
 
-# from .plots import get_plot
 
+def home(request):
+    
+    context = {
+        'title': 'Home'
+    }
 
-class HomePageView(ListView):
-    template_name = 'propellers/home.html'
-    model = Vehicle
+    return render(request, 'propellers/home.html', context)
 
 
 class VehiclePageView(ListView):
@@ -40,6 +42,15 @@ class PropellerPageView(ListView):
     template_name = 'propellers/propellers.html'
     model = Propeller
 
+
+
+def database_page(request):
+
+    context = {
+        'title': 'Databases'
+    }
+
+    return render(request, 'propellers/databases.html', context)
 
 def search(request):
 
@@ -80,9 +91,7 @@ def search(request):
 
             # create DataFrame
             qs = read_frame(results)
-            # print('qs', type(qs))
-            # print('results', type(results))
-
+            
             # get top 5 most common engines
             most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
             
@@ -95,6 +104,7 @@ def search(request):
             data = pd.DataFrame(qs2).head(10)
             
         context = {
+            'title': 'Results',
             'results': results,
             'most_common_engines_names': most_common_engines_names,
             'most_common_engines_totals': most_common_engines_totals,
@@ -107,6 +117,7 @@ def search(request):
         form = SearchPropeller()
 
     context = {
+        'title': 'Search',
         'form': form,
     }
     
@@ -141,6 +152,7 @@ def overall_stats(request):
 
 
     context = {
+        'title': 'Stats',
         'df': data.to_html(),
         'data2': data2,
         'd': d,

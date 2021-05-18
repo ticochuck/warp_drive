@@ -1,64 +1,55 @@
 {% load static %}
 
-<!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg special-color-dark">
-  <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/propeller.jpg' %}" alt="main_logo" width="45"></a>
-  <button class="navbar-toggler bg-light text-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-    =
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item
-        {% if '/' == request.path %}
-          active
-        {% endif %}
-      ">
-        <a class="text-white font-weight-bold h2 mr-3 text-decoration-none" href="{% url 'overall_stats' %}"> Overall Stats
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      {% comment %} {% if user.is_authenticated %} {% endcomment %}
-        <li class="nav-item">
-          <a class="nav-link text-white p-2" href="{% url 'search' %}"><i class="fas fa-search"></i> Search
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent-555"
+      aria-controls="navbarSupportedContent-555"
+      aria-expanded="true"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'home' %}">
+        <img src="{% static 'img/main_image.png' %}" alt="main_logo" height="45" loading="lazy"/>
+      </a>
 
-  
-      {% comment %} {% endif %} {% endcomment %}
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" style="color: #C61C22" href="{% url 'overall_stats' %}"><i class="fas fa-chart-pie"></i></i> Stats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: #C61C22" href="{% url 'search' %}"><i class="fas fa-search"></i> Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: #C61C22" href="{% url 'databases' %}"><i class="fas fa-database"></i> Databases</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
 
-      <li class="nav-item
-        {% if 'about' in request.path %}
-          active
-        {% endif %}
-      ">
-        <a class="nav-link text-white p-2" href="{% url 'home' %}"><i class="fas fa-database"></i> Databases
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <a class="nav-link p-2 " style="color: #C61C22" target="_blank" href="{% url 'home' %}" ><i class="fas fa-user-circle"></i> My Account
           <span class="sr-only">(current)</span>
-        </a>
-      </li>
-    </ul>
-    {% comment %} <ul class="navbar-nav ml-auto">
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link text-white p-2" href="{% url 'home' %}">
-            <i class="far fa-user"></i> Profile
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white p-2" href="{% url 'logout' %}">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
-        </li>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link text-white p-2" href="{% url 'login' %}">
-            <i class="fas fa-sign-in-alt"></i> Login
-          </a>
-        </li>
-      {% endif %}
+      </a>
       
-    </ul> {% endcomment %}
+      
+    </div>
+    <!-- Right elements -->
   </div>
+  <!-- Container wrapper -->
 </nav>
-<!--/.Navbar -->
+<!-- Navbar -->
