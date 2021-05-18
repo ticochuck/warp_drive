@@ -41,6 +41,15 @@ class PropellerPageView(ListView):
     model = Propeller
 
 
+
+def database_page(request):
+
+    context = {
+        'title': 'Propellers - Databases Page'
+    }
+
+    return render(request, 'propellers/databases.html', context)
+
 def search(request):
 
     if request.method == 'POST':

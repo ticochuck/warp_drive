@@ -1,7 +1,9 @@
 from django.urls import path
 
-from .views import EnginePageView, HomePageView, VehiclePageView, PropellerPageView, search, overall_stats
 from csvs.views import upload_file_view, upload_propellers
+
+from .views import (EnginePageView, HomePageView, PropellerPageView,
+                    VehiclePageView, database_page, overall_stats, search)
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
@@ -10,7 +12,8 @@ urlpatterns = [
     path('upload_propellers/', upload_propellers, name='upload_propellers'),
     path('search/', search, name='search'),
     path('results/', search, name='results'),
+    path('databases/', database_page, name='databases'),
     path('vehicles/', VehiclePageView.as_view(), name='vehicles'),
     path('engines/', EnginePageView.as_view(), name='engines'),
-    path('propellers/', PropellerPageView.as_view(), name='propellers')
+    path('propellers/', PropellerPageView.as_view(), name='propellers'),
 ]

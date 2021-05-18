@@ -6,13 +6,14 @@
   <div>
     <img src="{% static 'img/main_image.png' %}" alt="main_logo">
 
-    <h1 class="content text-center mb-4">Databases</h1>
+    <h1 class="content text-center mb-4">Warp Drive</h1>
+    <p>App to search propellers based on user input. Provides some basic data analytics.</p>
     
-    <a style="color:white" href="{% url 'vehicles' %}"><button type="button" class="btn" style="background-color: #C61C22">Vehicles</button></a>
+    <a style="color:white" href="{% url 'overall_stats' %}"><button type="button" class="btn" style="background-color: #C61C22">Stats</button></a>
 
-    <a style="color:white" href="{% url 'engines' %}"><button type="button" class="btn" style="background-color: #C61C22">Engines</button></a>
+    <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22">Search</button></a>
     
-    <a style="color:white" href="{% url 'propellers' %}"><button type="button" class="btn" style="background-color: #C61C22">Propellers</button></a>
+    <a style="color:white" href="{% url 'databases' %}"><button type="button" class="btn" style="background-color: #C61C22">Databases</button></a>
         
   </div>
 </div>
