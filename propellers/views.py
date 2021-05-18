@@ -43,7 +43,6 @@ class PropellerPageView(ListView):
     model = Propeller
 
 
-
 def database_page(request):
 
     context = {
@@ -51,6 +50,7 @@ def database_page(request):
     }
 
     return render(request, 'propellers/databases.html', context)
+
 
 def search(request):
 
@@ -64,7 +64,18 @@ def search(request):
                 vehicle = request.POST.get('vehicle_id')
             if request.POST.get('reduction_ratio_rename_to_red_drive_name') != '' or request.POST.get('reduction_ratio_rename_to_red_drive_name') != None:
                 reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
+            
+            if not engine and not vehicle and not reduction_rate:
+
+                results = None
                 
+                context = {
+                    'title': 'Results',
+                    'results': results,
+                }
+                
+                return render(request, 'propellers/results.html', context)
+
             all_info = Propeller.objects.all()
             
             results = all_info

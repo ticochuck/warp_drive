@@ -14,7 +14,7 @@
           {{ form|crispy }}
         </fieldset>
 
-        <button id="search_submit" type="submit" class="btn" style="background-color: #C61C22">
+        <button id="search_submit" type="submit" class="btn search_wait" style="background-color: #C61C22">
           <span style="color:white" >Search</span>
         </button>
       </form>
@@ -25,4 +25,9 @@
     <p>{context}</p>
   {% endif %}
 </div>
+
 {% endblock content %}
+
+{% block script %}
+  <script type="text/javascript" src="{% static 'js/search_wait.js' %}"></script>
+{% endblock script %}
