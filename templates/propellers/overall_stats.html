@@ -15,9 +15,34 @@
     </p>
   </div>
   
-  {{ df | safe }}
+  {% comment %} {{ df | safe }} {% endcomment %}
   <hr>
   
+  <h1>Top engines</h1>
+  
+  {{ d }}
+
+  <p>gp</p>
+    {% comment %} {% for thing in gp %}
+      <p>{{ thing }}</p>
+
+    {% endfor %} {% endcomment %}
+  
+    {% comment %} {{ d3 }} {% endcomment %}
+  
+  <h1>Top engines2</h1>
+  <p>.todict()</p>
+  
+    {% comment %} {{ d4 }}
+   {% endcomment %}
+  {% comment %} {% for kv in d4 %} {% endcomment %}
+    {% comment %} {% if engine[0] == '' %} {% endcomment %}
+      {% comment %} <p> empty , {{ engine.values }}</p>   {% endcomment %}
+    {% comment %} {% else %}  {% endcomment %}
+      {% comment %} <p> {{ data2}} </p> {% endcomment %}
+    {% comment %} {% endif %} {% endcomment %}
+  {% comment %} {% endfor %} {% endcomment %}
+
     
 {% endblock content %}
 
