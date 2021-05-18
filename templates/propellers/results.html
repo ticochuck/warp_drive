@@ -47,7 +47,6 @@
   {% endif %}
 
   <h1> Some Stats </h1>
-  {% comment %} <p> Most common reduction rates: {{ most_common_red_rates }} </p> {% endcomment %}
   
   <p> Most common engines: </p>
   
@@ -55,7 +54,11 @@
     <thead>
       <tr>
         {% for engine in most_common_engines_names %}
-        <th scope="col"> {{ engine }} </th>
+          {% if engine == '' or engine is None %}
+            <th style='font-style:italic' scope="col"> blank </th>
+          {% else %}
+            <th scope="col"> {{ engine }} </th>
+          {% endif %}
         {% endfor %}
       </tr>
     </thead>
@@ -70,7 +73,7 @@
 
   <h1>TEST NEW DF</h1>
   {{ df | safe }}
-  
+
 {% comment %}   
   {% if context %}
     <p>{context}</p>

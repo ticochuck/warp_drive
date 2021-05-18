@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
+from pandas.core import groupby
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
@@ -70,17 +71,19 @@ def search(request):
 
             # create DataFrame
             qs = read_frame(results)
+            # print('qs', type(qs))
+            # print('results', type(results))
 
             # get top 5 most common engines
-            most_common_engines_names = qs['engine_id'].value_counts()[:5].index.tolist()
-            # print(most_common_engines)
-            most_common_engines_totals = qs['engine_id'].value_counts()[:5].tolist()
+            most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
+            
+            most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
             print(most_common_engines_totals)
             
-            most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(5)
+            most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
 
             qs2 = results.values()
-            data = pd.DataFrame(qs2).head(5)
+            data = pd.DataFrame(qs2).head(10)
             
 
         context = {
@@ -107,10 +110,30 @@ def overall_stats(request):
     qs = Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values()
     data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
     
+        
+    data2 = pd.DataFrame(Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values())
+    
+    d = data2.groupby('engine_id')['reduction_ratio_rename_to_red_drive_name'].count().sort_values(ascending=False).head(10)
+    print('d', d)
+    data2 = data2['engine_id'].value_counts().head(10)
+
+    groupby_red_rate = data.groupby('engine_id').count()
+    # print(groupby_red_rate.head(5))
+    # print('grop1',type(groupby_red_rate))   
+ 
+    test = pd.DataFrame(data).groupby('engine_id')['reduction_ratio_rename_to_red_drive_name'].count()
+    # print('test', type(test))
+    
     context = {
-        'df': data.to_html()
+        'df': data.to_html(),
+        'data2': data2,
+        'gp': groupby_red_rate,
+        'd': d
+        # 'd3': d3.to_dict(),
+        # 'd4': d3.to_dict()
     }
 
+    
     return render(request, 'propellers/overall_stats.html', context)
     
 
