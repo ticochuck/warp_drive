@@ -1,61 +1,5 @@
 {% load static %}
 
-<!--Navbar -->
-{% comment %} <nav class="mb-1 navbar navbar-expand-lg special-color-dark"> {% endcomment %}
-{% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-<!-- Container wrapper -->
-  <div class="container-fluid">
-    <!-- Toggle button -->
-    
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent-555"
-      aria-controls="navbarSupportedContent-555"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-  <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/main_image.png' %}" alt="main_logo" width="350"></a>
-  <button class="navbar-toggler bg-light text-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-    <ul class="navbar-nav mr-auto">
-      
-      <li class="nav-item">
-        <a class="nav-link text-white p-2" href="{% url 'overall_stats' %}"><i class="fas fa-chart-pie"></i></i> Stats
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link text-white p-2" href="{% url 'search' %}"><i class="fas fa-search"></i> Search
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link text-white p-2" href="{% url 'databases' %}"><i class="fas fa-database"></i> Databases
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link text-white p-2" href="{% url 'databases' %}"><i class="fab fa-facebook"></i></i> 
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      
-    </ul>
-  </div>
-  </div>
-  <!-- Container wrapper -->
-</nav>  {% endcomment %}
-<!--/.Navbar -->
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <!-- Container wrapper -->
@@ -98,16 +42,10 @@
 
     <!-- Right elements -->
     <div class="d-flex align-items-center">
-      <a class="nav-link p-2 " target="_blank" href="https://www.youtube.com/user/WarpDriveInc" ><i class="fab fa-youtube"></i> 
+      <a class="nav-link p-2 " style="color: #C61C22" target="_blank" href="{% url 'home' %}" ><i class="fas fa-user-circle"></i> My Account
           <span class="sr-only">(current)</span>
       </a>
-      <a class="nav-link p-2" target="_blank" href="https://www.instagram.com/warpdriveprops/" ><i class="fab fa-instagram"></i> 
-          <span class="sr-only">(current)</span>
-      </a>
-      <a class="nav-link p-2" target="_blank" href="https://www.facebook.com/WarpDriveProps/"><i class="fab fa-facebook"></i></i> 
-          <span class="sr-only">(current)</span>
-      </a>
-    
+      
       
     </div>
     <!-- Right elements -->
