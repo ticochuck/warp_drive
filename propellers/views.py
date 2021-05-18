@@ -85,8 +85,9 @@ def search(request):
             qs2 = results.values()
             data = pd.DataFrame(qs2).head(10)
             
-
+            x = [0,1,2,3,4,5,6,7,8,9]
         context = {
+            'top_x': x,
             'results': results,
             'most_common_engines_names': most_common_engines_names,
             'most_common_engines_totals': most_common_engines_totals,

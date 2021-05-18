@@ -53,19 +53,29 @@
   <table class="table table-hover white-background">
     <thead>
       <tr>
-        {% for engine in most_common_engines_names %}
+        <th scope="col"> Engine ID </th>
+        <th scope="col"> Total </th>
+        {% comment %} {% for engine in most_common_engines_names %}
           {% if engine == '' or engine is None %}
             <th style='font-style:italic' scope="col"> blank </th>
           {% else %}
             <th scope="col"> {{ engine }} </th>
           {% endif %}
-        {% endfor %}
+        {% endfor %} {% endcomment %}
       </tr>
     </thead>
     <tbody>
       <tr>
-        {% for engine in most_common_engines_totals %}
-          <td class="align-middle"> {{ engine }} </td>
+        {% for val in most_common_engines_names %}
+          {% for total in most_common_engines_totals %}
+            {% if val == '' or val is None %}
+              <td style='font-style:italic' scope="col"> blank: {{ total }}</td>
+              
+            {% else %}
+              <td scope="col"> {{ val }}: {{ total }} </td>
+              
+            {% endif %}
+          {% endfor %}
         {% endfor %}
       </tr>
     </tbody>
