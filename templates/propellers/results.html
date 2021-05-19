@@ -52,8 +52,8 @@
   {% comment %} {% for info in data %} {% endcomment %}
     <p> {{ data }} </p>
 
-    {% if graph %}
-      <img src="data:image/png;base64, {{ graph | safe }}">
+    {% if chart %}
+      <img src="data:image/png;base64, {{ chart | safe }}">
     {% endif %}
   {% comment %} {% endfor %} {% endcomment %}
   

@@ -15,6 +15,7 @@ from django_pandas.io import read_frame
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
 from .utils import simple_plot
+from .plots import get_plot
 
 
 class VehiclePageView(ListView):
@@ -96,6 +97,10 @@ def search(request):
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
             # data = data_analysis(results)
+            
+            x = [x.engine_id for x in results]
+            y = [y.reduction_ratio_rename_to_red_drive_name for y in results]
+            chart =  get_plot(x,y)
 
             
             
@@ -105,6 +110,7 @@ def search(request):
             'title': 'Results',
             'results': results,
             'message' : message,
+            'chart': chart,
             # 'graph': data,
             # 'df': data.to_html()
         }
