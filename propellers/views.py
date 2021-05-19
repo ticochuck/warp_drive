@@ -80,25 +80,27 @@ def search(request):
             results = all_info
 
             if vehicle and engine and reduction_rate:
-                results = results.filter(vehicle_id__iexact = vehicle)
-                results = results.filter(engine_id__iexact = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__iexact = reduction_rate)
+                results = results.filter(vehicle_id__contains = vehicle)
+                results = results.filter(engine_id__contains = engine)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
             elif vehicle and engine and not reduction_rate:
-                results = results.filter(vehicle_id = vehicle)
-                results = results.filter(engine_id = engine)
+                results = results.filter(vehicle_id__contains = vehicle)
+                results = results.filter(engine_id__contains = engine)
             if vehicle and reduction_rate and not engine:
-                results = results.filter(vehicle_id = vehicle)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(vehicle_id__contains = vehicle)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
             elif vehicle:
-                results = results.filter(vehicle_id = vehicle)
+                results = results.filter(vehicle_id__contains = vehicle)
             elif engine and reduction_rate:
-                results = results.filter(engine_id = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(engine_id__contains = engine)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
             elif engine:
-                results = results.filter(engine_id = engine)
+                results = results.filter(engine_id__contains = engine)
             elif reduction_rate:
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
 
+            filtered_info = Propeller.objects.filter(vehicle_id__contains='lsa e')
+            print(filtered_info)
             # create DataFrame
             qs = read_frame(results)
             
