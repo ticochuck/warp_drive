@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top" style="bg-color:#6D6D6D">
+<nav class="navbar navbar-expand-lg sticky-top" style="background:#EEEEEE">
   <!-- Container wrapper -->
   <div class="container-fluid sticky-top">
     <!-- Toggle button -->
@@ -42,11 +42,12 @@
 
     <!-- Right elements -->
     <div class="d-flex align-items-center">
-      <a class="nav-link p-2 " style="color: #C61C22" target="_blank" href="{% url 'home' %}" ><i class="fas fa-user-circle"></i> My Account
+      <a class="nav-link p-2 " style="color: #C61C22" href="{% url 'home' %}" ><i class="far fa-question-circle"></i> Help
           <span class="sr-only">(current)</span>
       </a>
-      
-      
+      <a class="nav-link p-2 " style="color: #C61C22" href="{% url 'home' %}" ><i class="fas fa-user-circle"></i> My Account
+          <span class="sr-only">(current)</span>
+      </a>
     </div>
     <!-- Right elements -->
   </div>

@@ -2,17 +2,14 @@
 {% load static %}
 
 {% block content %}
-<div class="white-background d-flex align-items-center justify-content-center border border-light animated p-3 m-4" >
+<h1 class="content text-center mb-4" style="color: #C61C22">Databases</h1>
+<div class="white-background d-flex align-items-center justify-content-center p-3 m-4" >
   <div>
-    <img src="{% static 'img/main_image.png' %}" alt="main_logo">
+   <a style="color:white" href="{% url 'vehicles' %}"><button type="button" class="btn" style="background-color: #C61C22"><i class="fas fa-database"></i> Vehicles</button></a>
 
-    <h1 class="content text-center mb-4">Databases</h1>
+    <a style="color:white" href="{% url 'engines' %}"><button type="button" class="btn" style="background-color: #C61C22"><i class="fas fa-database"></i> Engines</button></a>
     
-    <a style="color:white" href="{% url 'vehicles' %}"><button type="button" class="btn" style="background-color: #C61C22">Vehicles</button></a>
-
-    <a style="color:white" href="{% url 'engines' %}"><button type="button" class="btn" style="background-color: #C61C22">Engines</button></a>
-    
-    <a style="color:white" href="{% url 'propellers' %}"><button type="button" class="btn" style="background-color: #C61C22">Propellers</button></a>
+    <a style="color:white" href="{% url 'propellers' %}"><button type="button" class="btn" style="background-color: #C61C22"><i class="fas fa-database"></i> Propellers</button></a>
         
   </div>
 </div>
