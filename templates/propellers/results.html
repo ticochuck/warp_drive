@@ -43,12 +43,8 @@
         </tbody>
       </table>
     </div>
-  {% else %}
-    <p>No results found. Please try searching with different criteria</p>
-    <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
-  {% endif %}
 
-  <h1> Some Stats </h1>
+    <h1> Some Stats </h1>
   
   <p> Most common engines: </p>
   
@@ -85,6 +81,18 @@
 
   <h1>TEST NEW DF</h1>
   {{ df | safe }}
+
+  
+  {% else %}
+  
+    <div class="container">
+      <p>No results found. Please try searching with different criteria</p>
+      <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
+      <hr>
+      <a class="m-2 mt-4" href="{% url 'home' %}">Return to Home Page</a>
+    </div>
+  
+  {% endif %}
 
 </div>
 {% endblock content %}
