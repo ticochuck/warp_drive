@@ -17,8 +17,10 @@
       <h3>The table is empty</h3>
     {% endif %}
     
-    <a style="color:white" href="{% url 'home' %}"><button type="button" class="btn" style="background-color: #C61C22">Home Page</button></a>
     <a style="color:white" href="{% url 'upload_propellers' %}"><button type="button" class="btn" style="background-color: #C61C22">Import Propellers</button></a>   
+
+    <hr>
+    <a class="m-2 mt-4" href="{% url 'home' %}">Return to Home Page</a>
 
   </div>
 </div>

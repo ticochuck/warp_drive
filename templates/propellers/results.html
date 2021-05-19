@@ -7,6 +7,8 @@
 {% endblock link %}
 
 {% block content %}
+
+<div class="container">
   <h1 class="content text-center mb-4">Results</h1>
   
     
@@ -84,11 +86,7 @@
   <h1>TEST NEW DF</h1>
   {{ df | safe }}
 
-{% comment %}   
-  {% if context %}
-    <p>{context}</p>
-  {% endif %} {% endcomment %}
-
+</div>
 {% endblock content %}
 
 {% block script %}

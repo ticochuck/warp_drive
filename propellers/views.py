@@ -43,7 +43,6 @@ class PropellerPageView(ListView):
     model = Propeller
 
 
-
 def database_page(request):
 
     context = {
@@ -51,6 +50,7 @@ def database_page(request):
     }
 
     return render(request, 'propellers/databases.html', context)
+
 
 def search(request):
 
@@ -64,31 +64,43 @@ def search(request):
                 vehicle = request.POST.get('vehicle_id')
             if request.POST.get('reduction_ratio_rename_to_red_drive_name') != '' or request.POST.get('reduction_ratio_rename_to_red_drive_name') != None:
                 reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
+            
+            if  engine == '' and vehicle == '' and reduction_rate == '':
+                results = None
                 
+                context = {
+                    'title': 'Results',
+                    'results': results,
+                }
+                
+                return render(request, 'propellers/results.html', context)
+
             all_info = Propeller.objects.all()
             
             results = all_info
 
             if vehicle and engine and reduction_rate:
-                results = results.filter(vehicle_id = vehicle)
-                results = results.filter(engine_id = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(vehicle_id__contains = vehicle)
+                results = results.filter(engine_id__contains = engine)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
             elif vehicle and engine and not reduction_rate:
-                results = results.filter(vehicle_id = vehicle)
-                results = results.filter(engine_id = engine)
+                results = results.filter(vehicle_id__contains = vehicle)
+                results = results.filter(engine_id__contains = engine)
             if vehicle and reduction_rate and not engine:
-                results = results.filter(vehicle_id = vehicle)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(vehicle_id__contains = vehicle)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
             elif vehicle:
-                results = results.filter(vehicle_id = vehicle)
+                results = results.filter(vehicle_id__contains = vehicle)
             elif engine and reduction_rate:
-                results = results.filter(engine_id = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(engine_id__contains = engine)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
             elif engine:
-                results = results.filter(engine_id = engine)
+                results = results.filter(engine_id__contains = engine)
             elif reduction_rate:
-                results = results.filter(reduction_ratio_rename_to_red_drive_name = reduction_rate)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
 
+            filtered_info = Propeller.objects.filter(vehicle_id__contains='lsa e')
+            print(filtered_info)
             # create DataFrame
             qs = read_frame(results)
             
@@ -96,7 +108,6 @@ def search(request):
             most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
             
             most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
-            print(most_common_engines_totals)
             
             most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
 
@@ -131,7 +142,7 @@ def overall_stats(request):
     data2 = pd.DataFrame(Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values())
     
     d = data2.groupby('engine_id')['reduction_ratio_rename_to_red_drive_name'].count().sort_values(ascending=False).head(10)
-    print('d', d)
+    
     data2 = data2['engine_id'].value_counts().head(10)
        
     ts = Propeller.objects.all().filter(vehicle_id='Messerschmitt ME109')
