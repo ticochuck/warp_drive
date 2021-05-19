@@ -9,9 +9,10 @@ def get_graph():
     plt.savefig(buffer, format='png')
     buffer.seek(0)
     image_png = buffer.getvalue()
-    graph = base64.b64decode(image_png)
+    graph = base64.b64encode(image_png)
     graph = graph.decode('utf-8')
     buffer.close()
+    return graph
 
 
 def get_plot(x,y):

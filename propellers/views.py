@@ -14,6 +14,7 @@ from django_pandas.io import read_frame
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
+from .utils import simple_plot
 
 
 class VehiclePageView(ListView):
@@ -94,31 +95,19 @@ def search(request):
             else:
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
+            # data = data_analysis(results)
 
-            # create DataFrame
-            # qs = read_frame(results)
             
-            # get top 5 most common engines
-            # most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
             
-            # most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
-            
-            # most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
-
-            # qs2 = results.values()
-            # data = pd.DataFrame(qs2).head(10)
         message = 'No results found. Please try searching with different criteria'
 
         context = {
             'title': 'Results',
             'results': results,
             'message' : message,
-            # 'most_common_engines_names': most_common_engines_names,
-            # 'most_common_engines_totals': most_common_engines_totals,
-            # 'most_common_red_rates': most_common_red_rates,
+            # 'graph': data,
             # 'df': data.to_html()
         }
-
 
         return render(request, 'propellers/results.html', context)
 
@@ -133,8 +122,24 @@ def search(request):
     return render(request, 'propellers/search.html', context)
 
 
-# def data_analysis(results):
+def data_analysis(results):
+    
+    # create DataFrame
+    qs = read_frame(results)
+    df = pd.DataFrame(results)
+    df['engine_id'] = df['engine_id'].apply(lambda x: x.strftim())
+    # get top 5 most common engines
+    most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
+    
+    most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
+    
+    most_common_red_drives = qs['reduction_ratio_rename_to_red_drive_name'].value_counts()[:10].tolist()
 
+    data = [most_common_engines_names, most_common_engines_totals, most_common_red_drives]
+    
+    graph = simple_plot(x=df['engine_id'], y=df['reduction_ratio_rename_to_red_drive_name'])
+
+    return graph
 
 
 def overall_stats(request):
