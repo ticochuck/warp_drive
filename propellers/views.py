@@ -107,10 +107,12 @@ def search(request):
 
             # qs2 = results.values()
             # data = pd.DataFrame(qs2).head(10)
-            
+        message = 'No results found. Please try searching with different criteria'
+
         context = {
             'title': 'Results',
             'results': results,
+            'message' : message,
             # 'most_common_engines_names': most_common_engines_names,
             # 'most_common_engines_totals': most_common_engines_totals,
             # 'most_common_red_rates': most_common_red_rates,

@@ -15,7 +15,7 @@ class SearchPropeller(forms.ModelForm):
             'reduction_ratio_rename_to_red_drive_name': 'Reduction Drive',
         }
         help_texts = {
-            'vehicle_id': 'Vehicle ids containing...',
-            'engine_id': 'Engine ids containing...',
-            'reduction_ratio_rename_to_red_drive_name': 'Reduction Drives containing...',
+            'vehicle_id': 'search for vehicle ids containing...',
+            'engine_id': 'Serch for engine ids containing...',
+            'reduction_ratio_rename_to_red_drive_name': 'Search for reduction drives containing...',
         }
