@@ -7,13 +7,15 @@ from io import BytesIO
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 from django_pandas.io import read_frame
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
+from .utils import simple_plot
+from .plots import get_plot
 
 
 class VehiclePageView(ListView):
@@ -60,9 +62,9 @@ def search(request):
             if request.POST.get('vehicel_id') != '' or request.POST.get('vehicel_id') != None:
                 vehicle = request.POST.get('vehicle_id')
             if request.POST.get('reduction_ratio_rename_to_red_drive_name') != '' or request.POST.get('reduction_ratio_rename_to_red_drive_name') != None:
-                reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
+                reduction_drive = request.POST.get('reduction_ratio_rename_to_red_drive_name')
             
-            if  engine == '' and vehicle == '' and reduction_rate == '':
+            if  engine == '' and vehicle == '' and reduction_drive == '':
                 
                 message = 'When searching, you must enter information in at least 1 field'
 
@@ -71,49 +73,48 @@ def search(request):
                     'message': message,
                 }
                 
+                # return redirect('search')
                 return render(request, 'propellers/results.html', context)
 
-            if vehicle and engine and reduction_rate:
+            if vehicle and engine and reduction_drive:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
                 results = results.filter(engine_id__contains = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
-            elif vehicle and engine and not reduction_rate:
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
+            elif vehicle and engine and not reduction_drive:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
                 results = results.filter(engine_id__contains = engine)
-            elif vehicle and reduction_rate and not engine:
+            elif vehicle and reduction_drive and not engine:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             elif vehicle:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
-            elif engine and reduction_rate:
+            elif engine and reduction_drive:
                 results = Propeller.objects.all().filter(engine_id__contains = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             elif engine:
                 results = Propeller.objects.all().filter(engine_id__contains = engine)
             else:
-                results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+                results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
-            # create DataFrame
-            # qs = read_frame(results)
+            # data = data_analysis(results)
             
-            # get top 5 most common engines
-            # most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
-            
-            # most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
-            
-            # most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
+            x = [x.engine_id for x in results]
+            y = [y.reduction_ratio_rename_to_red_drive_name for y in results]
+            chart =  get_plot(x,y)
 
-            # qs2 = results.values()
-            # data = pd.DataFrame(qs2).head(10)
             
+            
+        message = 'No results found. Please try searching with different criteria'
+
         context = {
             'title': 'Results',
             'results': results,
-            # 'most_common_engines_names': most_common_engines_names,
-            # 'most_common_engines_totals': most_common_engines_totals,
-            # 'most_common_red_rates': most_common_red_rates,
+            'message' : message,
+            'chart': chart,
+            # 'graph': data,
             # 'df': data.to_html()
         }
+
         return render(request, 'propellers/results.html', context)
 
     else:
@@ -125,6 +126,26 @@ def search(request):
     }
     
     return render(request, 'propellers/search.html', context)
+
+
+def data_analysis(results):
+    
+    # create DataFrame
+    qs = read_frame(results)
+    df = pd.DataFrame(results)
+    df['engine_id'] = df['engine_id'].apply(lambda x: x.strftim())
+    # get top 5 most common engines
+    most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
+    
+    most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
+    
+    most_common_red_drives = qs['reduction_ratio_rename_to_red_drive_name'].value_counts()[:10].tolist()
+
+    data = [most_common_engines_names, most_common_engines_totals, most_common_red_drives]
+    
+    graph = simple_plot(x=df['engine_id'], y=df['reduction_ratio_rename_to_red_drive_name'])
+
+    return graph
 
 
 def overall_stats(request):

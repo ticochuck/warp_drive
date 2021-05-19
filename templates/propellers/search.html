@@ -3,8 +3,9 @@
 {% load static %}
 
 {% block content %}
+
 <h1 class="content text-center mb-4" style="color: #C61C22">Search Propellers</h1>
-<p class="content text-center mb-4">You must search for at least 1 value. The search will return results that contain information that you entered</p>
+<p class="content text-center mb-4">The search will return information about propellers that contain what you entered in the search fields. You must search for at least 1 value.</p>
 <div class="white-background d-flex align-items-center justify-content-center p-3 m-4" >
   <div>
     
@@ -15,7 +16,7 @@
           {{ form|crispy }}
         </fieldset>
 
-        <button id="search_submit" type="submit" class="btn search_wait" style="background-color: #C61C22">
+        <button type="submit" class="btn" style="background-color: #C61C22">
           <span style="color:white" >Search</span>
         </button>
       </form>
