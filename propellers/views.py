@@ -150,7 +150,6 @@ def overall_stats(request):
     image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
     buf.close()
 
-
     context = {
         'title': 'Stats',
         'df': data.to_html(),
@@ -159,7 +158,6 @@ def overall_stats(request):
         'chart': image_base64
     }
 
-    
     return render(request, 'propellers/overall_stats.html', context)
     
 
