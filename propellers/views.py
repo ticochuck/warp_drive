@@ -1,9 +1,11 @@
-import matplotlib
+# import matplotlib
 
-matplotlib.use("Agg")
+# matplotlib.use('Agg')
 
 import base64
 from io import BytesIO
+
+# import seaborn as sns
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -14,8 +16,8 @@ from django_pandas.io import read_frame
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
-from .utils import simple_plot
 from .plots import get_plot
+from .utils import simple_plot
 
 
 class VehiclePageView(ListView):
@@ -97,7 +99,8 @@ def search(request):
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
             # data = data_analysis(results)
-            
+            data2 = data_analysis2(results)
+
             x = [x.engine_id for x in results]
             y = [y.reduction_ratio_rename_to_red_drive_name for y in results]
             chart =  get_plot(x,y)
@@ -127,6 +130,16 @@ def search(request):
     
     return render(request, 'propellers/search.html', context)
 
+
+def data_analysis2(results):
+
+    df = pd.DataFrame(results)
+    df = df.head(10)
+    print(df)
+    # sns.set()
+
+    # print(df.head(10))
+    pass
 
 def data_analysis(results):
     
@@ -159,27 +172,27 @@ def overall_stats(request):
     data2 = data2['engine_id'].value_counts().head(10)
        
     ts = Propeller.objects.all().filter(vehicle_id='Messerschmitt ME109')
-    x = [x.engine_id for x in ts]
+    # x = [x.engine_id for x in ts]
     
-    y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
-    plt.title('Engines and Red Rates')
-    plt.plot(x,y)
-    plt.xticks(rotation=45)
-    plt.xlabel('Engines')
-    plt.ylabel('Reduction Rates')
-    plt.tight_layout()
+    # y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
+    # plt.title('Engines and Red Rates')
+    # plt.plot(x,y)
+    # plt.xticks(rotation=45)
+    # plt.xlabel('Engines')
+    # plt.ylabel('Reduction Rates')
+    # plt.tight_layout()
     
-    buf = BytesIO()
-    plt.savefig(buf, format='png', dpi=100)
-    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
-    buf.close()
+    # buf = BytesIO()
+    # plt.savefig(buf, format='png', dpi=100)
+    # image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+    # buf.close()
 
     context = {
         'title': 'Stats',
         'df': data.to_html(),
         'data2': data2,
         'd': d,
-        'chart': image_base64
+        # 'chart': image_base64
     }
 
     return render(request, 'propellers/overall_stats.html', context)
