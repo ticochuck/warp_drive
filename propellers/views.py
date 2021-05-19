@@ -7,7 +7,7 @@ from io import BytesIO
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 from django_pandas.io import read_frame
@@ -60,9 +60,9 @@ def search(request):
             if request.POST.get('vehicel_id') != '' or request.POST.get('vehicel_id') != None:
                 vehicle = request.POST.get('vehicle_id')
             if request.POST.get('reduction_ratio_rename_to_red_drive_name') != '' or request.POST.get('reduction_ratio_rename_to_red_drive_name') != None:
-                reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
+                reduction_drive = request.POST.get('reduction_ratio_rename_to_red_drive_name')
             
-            if  engine == '' and vehicle == '' and reduction_rate == '':
+            if  engine == '' and vehicle == '' and reduction_drive == '':
                 
                 message = 'When searching, you must enter information in at least 1 field'
 
@@ -71,28 +71,30 @@ def search(request):
                     'message': message,
                 }
                 
+                # return redirect('search')
                 return render(request, 'propellers/results.html', context)
 
-            if vehicle and engine and reduction_rate:
+            if vehicle and engine and reduction_drive:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
                 results = results.filter(engine_id__contains = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
-            elif vehicle and engine and not reduction_rate:
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
+            elif vehicle and engine and not reduction_drive:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
                 results = results.filter(engine_id__contains = engine)
-            elif vehicle and reduction_rate and not engine:
+            elif vehicle and reduction_drive and not engine:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             elif vehicle:
                 results = Propeller.objects.all().filter(vehicle_id__contains = vehicle)
-            elif engine and reduction_rate:
+            elif engine and reduction_drive:
                 results = Propeller.objects.all().filter(engine_id__contains = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             elif engine:
                 results = Propeller.objects.all().filter(engine_id__contains = engine)
             else:
-                results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+                results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
+
             # create DataFrame
             # qs = read_frame(results)
             
@@ -114,6 +116,8 @@ def search(request):
             # 'most_common_red_rates': most_common_red_rates,
             # 'df': data.to_html()
         }
+
+
         return render(request, 'propellers/results.html', context)
 
     else:
@@ -125,6 +129,10 @@ def search(request):
     }
     
     return render(request, 'propellers/search.html', context)
+
+
+# def data_analysis(results):
+
 
 
 def overall_stats(request):
