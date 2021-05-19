@@ -1,5 +1,3 @@
-# import itertools
-
 import matplotlib
 
 matplotlib.use("Agg")
@@ -9,23 +7,13 @@ from io import BytesIO
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 from django_pandas.io import read_frame
-from pandas.core import groupby
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
-
-
-def home(request):
-    
-    context = {
-        'title': 'Home'
-    }
-
-    return render(request, 'propellers/home.html', context)
 
 
 class VehiclePageView(ListView):
@@ -41,6 +29,15 @@ class EnginePageView(ListView):
 class PropellerPageView(ListView):
     template_name = 'propellers/propellers.html'
     model = Propeller
+
+
+def home(request):
+    
+    context = {
+        'title': 'Home'
+    }
+
+    return render(request, 'propellers/home.html', context)
 
 
 def database_page(request):
@@ -66,61 +63,66 @@ def search(request):
                 reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
             
             if  engine == '' and vehicle == '' and reduction_rate == '':
-                results = None
-                
+                                
                 context = {
                     'title': 'Results',
-                    'results': results,
                 }
                 
                 return render(request, 'propellers/results.html', context)
 
-            all_info = Propeller.objects.all()
+            # all_info = Propeller.objects.all()
             
-            results = all_info
+            # results = all_info
 
-            if vehicle and engine and reduction_rate:
-                results = results.filter(vehicle_id__contains = vehicle)
-                results = results.filter(engine_id__contains = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
-            elif vehicle and engine and not reduction_rate:
-                results = results.filter(vehicle_id__contains = vehicle)
-                results = results.filter(engine_id__contains = engine)
-            if vehicle and reduction_rate and not engine:
-                results = results.filter(vehicle_id__contains = vehicle)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
-            elif vehicle:
-                results = results.filter(vehicle_id__contains = vehicle)
-            elif engine and reduction_rate:
-                results = results.filter(engine_id__contains = engine)
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
-            elif engine:
-                results = results.filter(engine_id__contains = engine)
-            elif reduction_rate:
-                results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+            # if vehicle and engine and reduction_rate:
+            #     results = results.filter(vehicle_id__contains = vehicle)
+            #     results = results.filter(engine_id__contains = engine)
+            #     results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+            # elif vehicle and engine and not reduction_rate:
+            #     results = results.filter(vehicle_id__contains = vehicle)
+            #     results = results.filter(engine_id__contains = engine)
+            # if vehicle and reduction_rate and not engine:
+            #     results = results.filter(vehicle_id__contains = vehicle)
+            #     results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+            # elif vehicle:
+            #     results = results.filter(vehicle_id__contains = vehicle)
+            # elif engine and reduction_rate:
+            #     results = results.filter(engine_id__contains = engine)
+            #     results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+            # elif engine:
+            #     results = results.filter(engine_id__contains = engine)
+            # elif reduction_rate:
+            #     results = results.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
 
-            filtered_info = Propeller.objects.filter(vehicle_id__contains='lsa e')
+            filtered_info = Propeller.objects.filter(vehicle_id__contains = vehicle)
+            print(len(filtered_info))
+            filtered_info = filtered_info.filter(engine_id__contains = engine)
+            print(len(filtered_info))
+            filtered_info = filtered_info.filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_rate)
+            print(len(filtered_info))
+            
             print(filtered_info)
+
             # create DataFrame
-            qs = read_frame(results)
+            # qs = read_frame(results)
             
             # get top 5 most common engines
-            most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
+            # most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
             
-            most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
+            # most_common_engines_totals = qs['engine_id'].value_counts()[:10].tolist()
             
-            most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
+            # most_common_red_rates = qs['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
 
-            qs2 = results.values()
-            data = pd.DataFrame(qs2).head(10)
+            # qs2 = results.values()
+            # data = pd.DataFrame(qs2).head(10)
             
         context = {
             'title': 'Results',
-            'results': results,
-            'most_common_engines_names': most_common_engines_names,
-            'most_common_engines_totals': most_common_engines_totals,
-            'most_common_red_rates': most_common_red_rates,
-            'df': data.to_html()
+            'results': filtered_info,
+            # 'most_common_engines_names': most_common_engines_names,
+            # 'most_common_engines_totals': most_common_engines_totals,
+            # 'most_common_red_rates': most_common_red_rates,
+            # 'df': data.to_html()
         }
         return render(request, 'propellers/results.html', context)
 
