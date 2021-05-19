@@ -63,9 +63,12 @@ def search(request):
                 reduction_rate = request.POST.get('reduction_ratio_rename_to_red_drive_name')
             
             if  engine == '' and vehicle == '' and reduction_rate == '':
-                                
+                
+                message = 'When searching, you must enter information in at least 1 field'
+
                 context = {
                     'title': 'Results',
+                    'message': message,
                 }
                 
                 return render(request, 'propellers/results.html', context)

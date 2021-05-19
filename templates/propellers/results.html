@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="container">
-  <h1 class="content text-center mb-4">Results</h1>
+  <h1 class="content text-center mb-4" style="color: #C61C22">Results</h1>
   
     
   {% if results%}
@@ -85,11 +85,11 @@
   
   {% else %}
   
-    <div class="container">
-      <p>No results found. Please try searching with different criteria</p>
+    <div class="container text-center">
+      <p class="content text-center"> {{ message }} </p>
       <a style="color:white" href="{% url 'search' %}"><button type="button" class="btn" style="background-color: #C61C22" > New Search</button></a>
       <hr>
-      <a class="m-2 mt-4" href="{% url 'home' %}">Return to Home Page</a>
+      <a class="mt-4" href="{% url 'home' %}">Return to Home Page</a>
     </div>
   
   {% endif %}

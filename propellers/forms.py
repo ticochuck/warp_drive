@@ -13,5 +13,5 @@ class SearchPropeller(forms.ModelForm):
             'vehicle_id': 'Vehicle ID',
         }
         help_texts = {
-            'vehicle_id': 'hola',
+            'vehicle_id': 'Engine ids containing...',
         }
