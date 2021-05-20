@@ -145,19 +145,33 @@ def overall_stats(request):
     
     data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'taper', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'nickel_LE', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
     
-    data2 = pd.DataFrame(Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values())
+    filtered_data = read_frame(Propeller.objects.all().filter(vehicle_id='un-Gyro'))
+    data = read_frame(Propeller.objects.all())
+    most_common_engines = data['engine_id'].value_counts().head(10)
+    most_common_engines = pd.DataFrame(most_common_engines)
     
-    data2 = data2['engine_id'].value_counts().head(10)
-       
+    most_common_vehicles = data['vehicle_id'].value_counts().head(10)
+    most_common_vehicles = pd.DataFrame(most_common_vehicles)
     
+    most_common_red_drives = data['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
+    most_common_red_drives = pd.DataFrame(most_common_red_drives)
+
+
+
     # x = [x.engine_id for x in ts]
     # y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
     
+    # xy = data.groupby('engine_id')['engine_id'].count().sort_values(ascending=False).head(10)
+    # print(xy)
+    # xy = pd.DataFrame(xy)
+
 
     context = {
         'title': 'Stats',
-        'df': data.to_html(),
-        'data2': data2,
+        'df': filtered_data.to_html(),
+        'most_common_engines': most_common_engines.to_html(),
+        'most_common_vehicles': most_common_vehicles.to_html(),
+        'most_common_red_drives': most_common_red_drives.to_html(),
     }
 
     return render(request, 'propellers/overall_stats.html', context)
