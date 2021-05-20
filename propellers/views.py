@@ -18,8 +18,8 @@ from django_pandas.io import read_frame
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
-from .plots import get_plot, get_second_plot
-# from .utils import simple_plot
+from .plots import get_plot
+
 
 
 class VehiclePageView(ListView):
@@ -159,22 +159,9 @@ def overall_stats(request):
     most_common_red_drives = data['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
     most_common_red_drives = pd.DataFrame(most_common_red_drives)
 
-    # latest = datax_studio_ship_date
-    
-    x = qs['engine_id'].value_counts()[:10].index.tolist()
-    y = qs['engine_id'].value_counts()[:10].tolist()
-        
-    x_pos = [i for i, _ in enumerate(x)]
-
-    fig = plt.bar(x_pos, y, color='green')
-    plt.xlabel("Energy Source")
-    plt.ylabel("Energy Output (GJ)")
-    plt.title("Energy output from various fuel sources")
-
-    plt.xticks(x_pos, x)
-
-    plt.show()
-    
+    # latest = read_frame(data)
+    # latest = latest['datax_studio_ship_date']
+    # print(latest)
     
     # x = [x.engine_id for x in ts]
     # y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
@@ -185,7 +172,7 @@ def overall_stats(request):
         'most_common_engines': most_common_engines.to_html(),
         'most_common_vehicles': most_common_vehicles.to_html(),
         'most_common_red_drives': most_common_red_drives.to_html(),
-        'fig': fig
+        # 'fig': fig
     }
 
     return render(request, 'propellers/overall_stats.html', context)

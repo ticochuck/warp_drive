@@ -31,20 +31,3 @@ def get_plot(results):
     graph = get_graph()
     return graph
 
-
-def get_second_plot(df, x,y):
-    plt.switch_backend('AGG')
-    fig = plt.figure(figsize=(8,8))
-    plt.title('Propellers vs Red Drives')
-    plt.matshow(df, cmap='RdBu', fignum=fig.number)
-    plt.xticks(range(len(df.columns)), df.columns, rotation="vertical")
-    plt.xticks(range(len(df.columns)), df.columns)
-    plt.xlabel('Propellers')
-    plt.ylabel('Reduction Drives')
-    # plt.tight_layout()
-    graph = get_graph()
-    return graph
-
-
-# def bar_graph():
-
