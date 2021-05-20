@@ -7,20 +7,75 @@
 {% endblock link %}
 
 {% block content %}
-  <h1 class="content text-center mb-4">Overall Stats</h1>
+  <h1 class="content text-center mb-4" style="color: #C61C22">Overall Stats</h1>
+  <!-- Modal Buttons -->
+  <div class="container text-center">
+    <button
+      type="button"
+      class="btn"
+      data-toggle="modal"
+      data-target="#exampleModal"
+      data-whatever="@mdo"
+      style="background-color: #C61C22"
+    >
+      <span style="color:white">Open Dataframe</span>
+    </button>
+    <button
+      type="button"
+      class="btn"
+      data-toggle="modal"
+      data-target="#exampleModal1"
+      data-whatever="@mdo"
+      style="background-color: #C61C22"
+    >
+      <span style="color:white">Other Data</span>
+    </button>
+    <button
+      type="button"
+      class="btn"
+      data-toggle="modal"
+      data-target="#exampleModal2"
+      data-whatever="@mdo"
+      style="background-color: #C61C22"
+    >
+      <span style="color:white">More Stuff</span>
+    </button>
+  </div>
+  <!-- End Modal Buttons -->
   
-    
-  
-  <h1>Top engines</h1>
-  
-  {{ d }}
-
-  <hr>
-
-  {% comment %} {% if chart %} {% endcomment %}
-    <p>Hola</p>
-    <img src="data:image/png;base64, {{ chart | safe }}">
-  {% comment %} {% endif %} {% endcomment %}
+  <!-- Modal Content -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Propellers Dataframe</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {{ df | safe }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Content -->
   
   <hr>
   
@@ -28,7 +83,8 @@
     <p>This information is based on all data within Propellers Database. To search for data using specific criteria click <a href="{% url 'search' %}"><b>here</b></a>
     </p>
   </div>
-  {{ df | safe }}
+
+  
   
     
 {% endblock content %}

@@ -2,13 +2,12 @@
 
 # matplotlib.use('Agg')
 
-import base64
-from io import BytesIO
+# import base64
+# from io import BytesIO
 
-# import seaborn as sns
-
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import pandas as pd
+# import seaborn as sns
 from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
@@ -16,8 +15,8 @@ from django_pandas.io import read_frame
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
-from .plots import get_plot
-from .utils import simple_plot
+from .plots import get_plot, get_second_plot
+# from .utils import simple_plot
 
 
 class VehiclePageView(ListView):
@@ -98,15 +97,9 @@ def search(request):
             else:
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
-            # data = data_analysis(results)
-            data2 = data_analysis2(results)
-
-            x = [x.engine_id for x in results]
-            y = [y.reduction_ratio_rename_to_red_drive_name for y in results]
-            chart =  get_plot(x,y)
-
             
-            
+            chart =  get_plot(results)
+
         message = 'No results found. Please try searching with different criteria'
 
         context = {
@@ -114,7 +107,6 @@ def search(request):
             'results': results,
             'message' : message,
             'chart': chart,
-            # 'graph': data,
             # 'df': data.to_html()
         }
 
@@ -131,22 +123,12 @@ def search(request):
     return render(request, 'propellers/search.html', context)
 
 
-def data_analysis2(results):
-
-    df = pd.DataFrame(results)
-    df = df.head(10)
-    print(df)
-    # sns.set()
-
-    # print(df.head(10))
-    pass
-
 def data_analysis(results):
     
     # create DataFrame
     qs = read_frame(results)
     df = pd.DataFrame(results)
-    df['engine_id'] = df['engine_id'].apply(lambda x: x.strftim())
+    
     # get top 5 most common engines
     most_common_engines_names = qs['engine_id'].value_counts()[:10].index.tolist()
     
@@ -154,45 +136,28 @@ def data_analysis(results):
     
     most_common_red_drives = qs['reduction_ratio_rename_to_red_drive_name'].value_counts()[:10].tolist()
 
-    data = [most_common_engines_names, most_common_engines_totals, most_common_red_drives]
-    
-    graph = simple_plot(x=df['engine_id'], y=df['reduction_ratio_rename_to_red_drive_name'])
-
-    return graph
+        
+    # return graph
 
 
 def overall_stats(request):
     qs = Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values()
-    data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
+    
+    data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'taper', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'nickel_LE', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
     
     data2 = pd.DataFrame(Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values())
     
-    d = data2.groupby('engine_id')['reduction_ratio_rename_to_red_drive_name'].count().sort_values(ascending=False).head(10)
-    
     data2 = data2['engine_id'].value_counts().head(10)
        
-    ts = Propeller.objects.all().filter(vehicle_id='Messerschmitt ME109')
+    
     # x = [x.engine_id for x in ts]
-    
     # y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
-    # plt.title('Engines and Red Rates')
-    # plt.plot(x,y)
-    # plt.xticks(rotation=45)
-    # plt.xlabel('Engines')
-    # plt.ylabel('Reduction Rates')
-    # plt.tight_layout()
     
-    # buf = BytesIO()
-    # plt.savefig(buf, format='png', dpi=100)
-    # image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
-    # buf.close()
 
     context = {
         'title': 'Stats',
         'df': data.to_html(),
         'data2': data2,
-        'd': d,
-        # 'chart': image_base64
     }
 
     return render(request, 'propellers/overall_stats.html', context)
