@@ -12,33 +12,39 @@
   <div class="container text-center">
     <button
       type="button"
-      class="btn"
+      class="btn btn-outline-danger btn-rounded"
       data-toggle="modal"
-      data-target="#exampleModal"
+      data-target="#dataframe"
       data-whatever="@mdo"
-      style="background-color: #C61C22"
     >
-      <span style="color:white">Open Dataframe</span>
+      <span style="color:#C61C22">Open Dataframe</span>
     </button>
     <button
       type="button"
-      class="btn"
+      class="btn btn-outline-danger btn-rounded"
       data-toggle="modal"
-      data-target="#exampleModal1"
+      data-target="#common_engines"
       data-whatever="@mdo"
-      style="background-color: #C61C22"
     >
-      <span style="color:white">Other Data</span>
+      <span style="color:#C61C22">Top 10 Engines</span>
     </button>
     <button
       type="button"
-      class="btn"
+      class="btn btn-outline-danger btn-rounded"
       data-toggle="modal"
-      data-target="#exampleModal2"
+      data-target="#common_vehicles"
       data-whatever="@mdo"
-      style="background-color: #C61C22"
     >
-      <span style="color:white">More Stuff</span>
+      <span style="color:#C61C22">Top 10 Vehicles</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-rounded"
+      data-toggle="modal"
+      data-target="#common_red_drives"
+      data-whatever="@mdo"
+    >
+      <span style="color:#C61C22">Top 10 Reduction Drives</span>
     </button>
   </div>
   <!-- End Modal Buttons -->
@@ -46,7 +52,7 @@
   <!-- Modal Content -->
   <div
     class="modal fade"
-    id="exampleModal"
+    id="dataframe"
     data-backdrop="static"
     data-keyboard="false"
     tabindex="-1"
@@ -68,16 +74,115 @@
           {{ df | safe }}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
+          <button type="button" class="btn" data-dismiss="modal" style="background-color: #C61C22">
+            <span style="color:white">Close</span>
           </button>
         </div>
       </div>
     </div>
   </div>
+
+  <div
+    class="modal fade"
+    id="common_engines"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Most Common Engines</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {{ most_common_engines | safe }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal" style="background-color: #C61C22">
+            <span style="color:white">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="common_vehicles"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Most Common Vehicles</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {{ most_common_vehicles | safe }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal" style="background-color: #C61C22">
+            <span style="color:white">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade text-center"
+    id="common_red_drives"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Most Common Reduction Drives</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          {{ most_common_red_drives | safe }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal" style="background-color: #C61C22">
+            <span style="color:white">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal Content -->
   
   <hr>
+  
+  
   
   <div>
     <p>This information is based on all data within Propellers Database. To search for data using specific criteria click <a href="{% url 'search' %}"><b>here</b></a>
