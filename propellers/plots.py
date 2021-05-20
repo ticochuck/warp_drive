@@ -44,3 +44,7 @@ def get_second_plot(df, x,y):
     # plt.tight_layout()
     graph = get_graph()
     return graph
+
+
+# def bar_graph():
+

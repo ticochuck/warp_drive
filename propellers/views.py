@@ -5,7 +5,10 @@
 # import base64
 # from io import BytesIO
 
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+# %matplotlib inline
+plt.style.use('ggplot')
+
 import pandas as pd
 # import seaborn as sns
 from django.shortcuts import redirect, render
@@ -143,9 +146,9 @@ def data_analysis(results):
 def overall_stats(request):
     qs = Propeller.objects.all().filter(vehicle_id = 'un-Gyro').values()
     
-    data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'taper', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'nickel_LE', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
+    filtered_data = pd.DataFrame(qs).drop(['id', 'old_Serial', 'new_Serial', 'hub_Serial', 'status', 'product_id', 'do_not_import', 'taper', 'hub_model', 'taper_specs', 'tip_color', 'weight_start', 'weight_end', 'nickel_LE', 'weight_vert', 'weight_taperbefore', 'weight_taperafter', 'tracking', 'bld_notes', 'pinned_collars', 'customer_notes', 'vehicle_notes', 'engine_notes', 'bolt_pattern_notes_new_field', 'reduction_style', 'update_1_date', 'update_1', 'update_2_date', 'update_2', 'update_3_date', 'update_3', 'update_4_date', 'update_4', 'update_5_Date', 'update_5', 'x_studio_ship_date', 'old_notes', 'old_bldspecs', 'old_bldnum', 'old_bldtype', 'old_hub'], axis=1)
     
-    filtered_data = read_frame(Propeller.objects.all().filter(vehicle_id='un-Gyro'))
+    # filtered_data = read_frame(Propeller.objects.all().filter(vehicle_id='un-Gyro'))
     data = read_frame(Propeller.objects.all())
     most_common_engines = data['engine_id'].value_counts().head(10)
     most_common_engines = pd.DataFrame(most_common_engines)
@@ -156,15 +159,25 @@ def overall_stats(request):
     most_common_red_drives = data['reduction_ratio_rename_to_red_drive_name'].value_counts().head(10)
     most_common_red_drives = pd.DataFrame(most_common_red_drives)
 
+    # latest = datax_studio_ship_date
+    
+    x = qs['engine_id'].value_counts()[:10].index.tolist()
+    y = qs['engine_id'].value_counts()[:10].tolist()
+        
+    x_pos = [i for i, _ in enumerate(x)]
 
+    fig = plt.bar(x_pos, y, color='green')
+    plt.xlabel("Energy Source")
+    plt.ylabel("Energy Output (GJ)")
+    plt.title("Energy output from various fuel sources")
 
+    plt.xticks(x_pos, x)
+
+    plt.show()
+    
+    
     # x = [x.engine_id for x in ts]
     # y = [y.reduction_ratio_rename_to_red_drive_name for y in ts]
-    
-    # xy = data.groupby('engine_id')['engine_id'].count().sort_values(ascending=False).head(10)
-    # print(xy)
-    # xy = pd.DataFrame(xy)
-
 
     context = {
         'title': 'Stats',
@@ -172,6 +185,7 @@ def overall_stats(request):
         'most_common_engines': most_common_engines.to_html(),
         'most_common_vehicles': most_common_vehicles.to_html(),
         'most_common_red_drives': most_common_red_drives.to_html(),
+        'fig': fig
     }
 
     return render(request, 'propellers/overall_stats.html', context)
