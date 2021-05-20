@@ -49,13 +49,20 @@
     <h1 class="container text-center mt-4 mb-4" style="color: #C61C22"> Some Stats </h1>
   
   <p> Most common engines: </p>
-  {% comment %} {% for info in data %} {% endcomment %}
-    <p> {{ data }} </p>
+  
+  <p> {{ data }} </p>
 
-    {% if chart %}
-      <img src="data:image/png;base64, {{ chart | safe }}">
-    {% endif %}
-  {% comment %} {% endfor %} {% endcomment %}
+  {% if chart %}
+    <img src="data:image/png;base64, {{ chart | safe }}">
+  {% endif %}
+
+  <hr>
+
+  {% if chart2 %}
+    <img src="data:image/png;base64, {{ chart2 | safe }}">
+  {% endif %}
+
+  <hr>
   
   <table class="table table-hover white-background">
     <thead>
