@@ -68,9 +68,11 @@
   {% endif %}
 
   <hr>
-  {% for engine, blade in df %}
+
+  {{ df }}
+  {% comment %} {% for engine, blade in df %}
     {{ engine }} {{ blade }}
-  {% endfor %}
+  {% endfor %} {% endcomment %}
 
   <table class="table table-hover white-background">
     <thead>
