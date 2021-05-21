@@ -26,6 +26,9 @@
             <th scope="col">Engine ID</th>
             <th scope="col">Reduction Rate</th>
             <th scope="col">Rotation</th>
+            <th scope="col">Blade Count</th>
+            <th scope="col">Blade Diameter</th>
+            <th scope="col">Blade Model</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -38,6 +41,10 @@
               <td class="align-middle">{{ propeller.engine_id }}</th>
               <td class="align-middle">{{ propeller.reduction_ratio_rename_to_red_drive_name }}</th>
               <td class="align-middle">{{ propeller.rotation }}</th>
+              <td class="align-middle">{{ propeller.blade_count }}</th>
+              <td class="align-middle">{{ propeller.bld_dia }}</th>
+              <td class="align-middle">{{ propeller.blade_model }}</th>
+              
             </tr>
           {% endfor %}
         </tbody>
@@ -61,6 +68,9 @@
   {% endif %}
 
   <hr>
+  {% for engine, blade in df %}
+    {{ engine }} {{ blade }}
+  {% endfor %}
 
   <table class="table table-hover white-background">
     <thead>
@@ -94,7 +104,7 @@
   </table>
 
   <h1 class="container text-center mb-4" style="color: #C61C22">TEST NEW DF</h1>
-  {{ df | safe }}
+  {% comment %} {{ df | safe }} {% endcomment %}
 
   
   {% else %}

@@ -100,18 +100,19 @@ def search(request):
             else:
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
-            
             chart =  get_plot(results)
 
-        message = 'No results found. Please try searching with different criteria'
+            message = 'No results found. Please try searching with different criteria'
 
-        context = {
-            'title': 'Results',
-            'results': results,
-            'message' : message,
-            'chart': chart,
-            # 'df': data.to_html()
-        }
+            df = some_da(results)
+
+            context = {
+                'title': 'Results',
+                'results': results,
+                'message' : message,
+                'chart': chart,
+                'df': df
+            }
 
         return render(request, 'propellers/results.html', context)
 
@@ -124,6 +125,17 @@ def search(request):
     }
     
     return render(request, 'propellers/search.html', context)
+
+
+def some_da(results):
+
+    df = pd.DataFrame(results)
+
+    df = df.groupby(['engine_id', 'blade_count'])
+
+    # df = pd.DataFrame(df)
+
+    return df
 
 
 def data_analysis(results):
