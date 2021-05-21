@@ -26,6 +26,9 @@
             <th scope="col">Engine ID</th>
             <th scope="col">Reduction Rate</th>
             <th scope="col">Rotation</th>
+            <th scope="col">Blade Count</th>
+            <th scope="col">Blade Diameter</th>
+            <th scope="col">Blade Model</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -38,6 +41,10 @@
               <td class="align-middle">{{ propeller.engine_id }}</th>
               <td class="align-middle">{{ propeller.reduction_ratio_rename_to_red_drive_name }}</th>
               <td class="align-middle">{{ propeller.rotation }}</th>
+              <td class="align-middle">{{ propeller.blade_count }}</th>
+              <td class="align-middle">{{ propeller.bld_dia }}</th>
+              <td class="align-middle">{{ propeller.blade_model }}</th>
+              
             </tr>
           {% endfor %}
         </tbody>

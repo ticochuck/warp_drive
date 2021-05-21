@@ -99,7 +99,7 @@ def search(request):
                 results = Propeller.objects.all().filter(engine_id__contains = engine)
             else:
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
-            
+            print(results) 
             
             chart =  get_plot(results)
 
