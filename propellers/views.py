@@ -105,6 +105,7 @@ def search(request):
             message = 'No results found. Please try searching with different criteria'
 
             df = some_da(results)
+            print(df, 'in views')
 
             context = {
                 'title': 'Results',
@@ -129,9 +130,9 @@ def search(request):
 
 def some_da(results):
 
-    df = pd.DataFrame(results)
-
-    df = df.groupby(['engine_id', 'blade_count'])
+    # df = pd.DataFrame(results)
+    df = read_frame(results)
+    print('df[id]', df)
 
     # df = pd.DataFrame(df)
 
