@@ -20,7 +20,7 @@ from django_pandas.io import read_frame
 
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
-from .plots import get_plot
+from .plots import get_plot, get_plot2
 
 
 class VehiclePageView(ListView):
@@ -103,6 +103,9 @@ def search(request):
                 results = Propeller.objects.all().filter(reduction_ratio_rename_to_red_drive_name__contains = reduction_drive)
             
             chart =  get_plot(results)
+        
+
+            # chart2 =  get_plot2(results)
 
             message = 'No results found. Please try searching with different criteria'
 
@@ -114,7 +117,8 @@ def search(request):
                 'results': results,
                 'message' : message,
                 'chart': chart,
-                'df': df
+                # 'chart2': chart2,
+                # 'df': df
             }
 
         return render(request, 'propellers/results.html', context)

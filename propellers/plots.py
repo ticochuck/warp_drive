@@ -1,5 +1,6 @@
 import base64
 from io import BytesIO
+from django_pandas.io import read_frame
 
 import matplotlib.pyplot as plt
 # import seaborn as sns
@@ -18,16 +19,35 @@ def get_graph():
 
 
 def get_plot(results):
-    x = [x.engine_id for x in results]
-    y = [y.reduction_ratio_rename_to_red_drive_name for y in results]
+    x = [x.rotation for x in results]
+    x.sort()
+    y = [y.blade_count for y in results]
+    y.sort()
     plt.switch_backend('AGG')
     plt.figure(figsize=(6,5))
-    plt.title('Engines and Red Rates')
+    plt.title('Blade Count vs Rotation')
     plt.plot(x,y)
-    plt.xticks(rotation=45)
-    plt.xlabel('Engines')
-    plt.ylabel('Reduction Rates')
+    # plt.xticks(rotation=45)
+    plt.xlabel('Rotation')
+    plt.ylabel('Blade Count')
     plt.tight_layout()
     graph = get_graph()
     return graph
 
+
+def get_plot2(results):
+
+    data = read_frame(results)
+
+    x = data['blade_count'].value_counts()
+    y = [y.blade_count for y in results]
+    plt.switch_backend('AGG')
+    plt.figure(figsize=(6,5))
+    plt.title('Blade Count')
+    plt.plot(x,y)
+    # plt.xticks(rotation=45)
+    plt.xlabel('Rotation')
+    plt.ylabel('Blade Count')
+    plt.tight_layout()
+    graph = get_graph()
+    return graph
