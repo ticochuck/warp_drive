@@ -6,10 +6,12 @@
 # from io import BytesIO
 
 import matplotlib.pyplot as plt
+
 # %matplotlib inline
 plt.style.use('ggplot')
 
 import pandas as pd
+from django.contrib import messages
 # import seaborn as sns
 from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
@@ -19,7 +21,6 @@ from django_pandas.io import read_frame
 from .forms import SearchPropeller
 from .models import Engine, Propeller, Vehicle
 from .plots import get_plot
-
 
 
 class VehiclePageView(ListView):
@@ -70,6 +71,7 @@ def search(request):
             
             if  engine == '' and vehicle == '' and reduction_drive == '':
                 
+                messages.error(request, 'When searching, you must enter information in at least 1 field')
                 message = 'When searching, you must enter information in at least 1 field'
 
                 context = {
