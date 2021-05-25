@@ -13,6 +13,7 @@ urlpatterns = [
     path('databases/', database_page, name='databases'),
     path('upload/', upload_file_view, name='upload'),
     path('upload_propellers/', upload_propellers, name='upload_propellers'),
+    path('upload_engines/', upload_propellers, name='upload_engines'),
     path('vehicles/', VehiclePageView.as_view(), name='vehicles'),
     path('engines/', EnginePageView.as_view(), name='engines'),
     path('propellers/', PropellerPageView.as_view(), name='propellers'),
