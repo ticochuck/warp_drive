@@ -25,7 +25,7 @@ class Engine(models.Model):
     displacement = models.CharField(max_length=64)
     displacement_cu_in = models.CharField(max_length=64)
     horsepower = models.CharField(max_length=64)
-    rpm_max = models.CharField(max_length=64)
+    rpm_max = models.IntegerField()
     rpm_cruise = models.CharField(max_length=64)
     rotation = models.CharField(max_length=64)
     rotation_notes = models.CharField(max_length=64)
