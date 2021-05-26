@@ -22,8 +22,22 @@ class Engine(models.Model):
     name = models.CharField(max_length=64)
     manufacturer = models.CharField(max_length=64)
     model = models.CharField(max_length=64)
-    notes = models.CharField(max_length=64, blank=True)
-
+    displacement = models.CharField(max_length=64)
+    displacement_cu_in = models.CharField(max_length=64)
+    horsepower = models.CharField(max_length=64)
+    rpm_max = models.IntegerField()
+    rpm_cruise = models.CharField(max_length=64)
+    rotation = models.CharField(max_length=64)
+    rotation_notes = models.CharField(max_length=64)
+    selection_field_qxfWJ = models.CharField(max_length=64)
+    cylinder_count = models.CharField(max_length=64)
+    cooling = models.CharField(max_length=64)
+    website = models.CharField(max_length=64)
+    possible_reduction_ratios = models.CharField(max_length=64)
+    important_note = models.CharField(max_length=64)
+    bolt_patterns = models.CharField(max_length=64)
+    notes = models.CharField(max_length=64)
+    
 
     def __str__(self):
         return f'{self.name}, {self.manufacturer}, {self.model}'

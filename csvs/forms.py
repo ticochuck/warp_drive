@@ -18,3 +18,11 @@ class PropellerCsvModelForm(forms.ModelForm):
         fields = ('file_name',)
         labels = {'file_name': 'Import File'}
         help_texts = {'file_name': 'Must be a CSV file'}
+
+
+class EngineCsvModelForm(forms.ModelForm):
+    class Meta:
+        model = Csv
+        fields = ('file_name',)
+        labels = {'file_name': 'Import File'}
+        help_texts = {'file_name': 'Must be a CSV file'}

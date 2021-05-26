@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from propellers.models import Engine, Propeller, Vehicle
 
-from .forms import CsvModelForm, PropellerCsvModelForm
+from .forms import CsvModelForm, EngineCsvModelForm, PropellerCsvModelForm
 from .models import Csv
 
 
@@ -122,3 +122,47 @@ def upload_propellers(request):
             obj.save()
 
     return render(request, 'propellers/upload.html', {'form': form})
+
+
+def upload_engines(request):
+    form = EngineCsvModelForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        form = EngineCsvModelForm()
+        obj = Csv.objects.get(activated=False)
+
+        #open and read csv file
+        with open(obj.file_name.path, 'r') as f:
+
+            reader = csv.reader(f)
+
+            for i, row in enumerate(reader):
+                if i == 0:
+                    pass
+                else:
+                    Engine.objects.create(
+                        name = row[0],
+                        manufacturer = row[1],
+                        model = row[2],
+                        displacement = row[3],
+                        displacement_cu_in = row[4],
+                        horsepower = row[5],
+                        rpm_max = row[6],
+                        rpm_cruise = row[7],
+                        rotation = row[8],
+                        rotation_notes = row[9],
+                        selection_field_qxfWJ = row[10],
+                        cylinder_count = row[11],
+                        cooling = row[12],
+                        website = row[13],
+                        possible_reduction_ratios = row[14],
+                        important_note = row[15],
+                        bolt_patterns = row[16],
+                        notes = row[17],
+                    )
+                    
+            obj.activated = True
+            obj.save()
+
+    return render(request, 'propellers/upload_engines.html', {'form': form})
+    
