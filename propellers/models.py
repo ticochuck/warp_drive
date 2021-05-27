@@ -7,7 +7,20 @@ class Vehicle(models.Model):
     model = models.CharField(max_length=64)
     vehicle_type = models.CharField(max_length=64)
     prop_orientation = models.CharField(max_length=64)
-    notes = models.CharField(max_length=64, blank=True)
+    max_prop_dia = models.CharField(max_length=64)
+    crew = models.CharField(max_length=64)
+    engine_count = models.CharField(max_length=64)
+    length = models.CharField(max_length=64)
+    height = models.CharField(max_length=64)
+    wingspan = models.CharField(max_length=64)
+    wing_area = models.CharField(max_length=64)
+    design_load_factor = models.CharField(max_length=64)
+    fuel_capacity = models.CharField(max_length=64)
+    vne = models.CharField(max_length=64)
+    cruise_speed = models.CharField(max_length=64)
+    production_years = models.CharField(max_length=64)
+    link_1 = models.CharField(max_length=64)
+    vehicle_notes = models.CharField(max_length=64)
 
 
     def __str__(self):
