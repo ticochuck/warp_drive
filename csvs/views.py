@@ -164,5 +164,5 @@ def upload_engines(request):
             obj.activated = True
             obj.save()
 
-    return render(request, 'propellers/upload_engines.html', {'form': form})
+    return render(request, 'propellers/upload.html', {'form': form})
     
