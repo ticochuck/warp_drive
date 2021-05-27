@@ -6,6 +6,6 @@ app_name='csvs'
 
 urlpatterns = [
     path('', upload_file_view, name='upload'),
-    path('upload_propellers/', upload_file_view, name='upload'),
+    path('upload_propellers/', upload_file_view, name='upload_propellers'),
     path('upload_engines/', upload_file_view, name='upload_engines'),
 ]
