@@ -59,7 +59,7 @@ def upload_vehicles(request):
             obj.activated = True
             obj.save()
 
-    return render(request, 'propellers/upload.html', {'form': form})
+    return render(request, 'propellers/upload_vehicles.html', {'form': form})
 
 
 def upload_propellers(request):
