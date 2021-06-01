@@ -5,7 +5,7 @@ from .models import Vehicle, Engine, Propeller
 
 @admin.register(Vehicle)
 class VehicleAdmin(ImportExportActionModelAdmin):
-    list_display = ('name', 'manufacturer', 'model', 'vehicle_type', 'prop_orientation', 'notes')
+    list_display = ('name', 'manufacturer', 'model', 'vehicle_type', 'prop_orientation')
 
 
 @admin.register(Engine)

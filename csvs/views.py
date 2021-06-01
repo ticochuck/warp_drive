@@ -8,7 +8,7 @@ from .forms import CsvModelForm, EngineCsvModelForm, PropellerCsvModelForm
 from .models import Csv
 
 
-def upload_file_view(request):
+def upload_vehicles(request):
     form = CsvModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
@@ -35,14 +35,27 @@ def upload_file_view(request):
                     # print(type(row))
                     
                     Vehicle.objects.create(
-                        name = row[1],
-                        manufacturer = row[2],
-                        model = row[3],
-                        vehicle_type = row[4],
-                        prop_orientation = row[5],
-                        notes = row[6],
+                        name = row[0],
+                        manufacturer = row[1],
+                        model = row[2],
+                        vehicle_type = row[3],
+                        prop_orientation = row[4],
+                        max_prop_dia = row[5],
+                        crew = row[6],
+                        engine_count = row[7],
+                        length = row[8],
+                        height = row[9],
+                        wingspan = row[10],
+                        wing_area = row[11],
+                        design_load_factor = row[12],
+                        fuel_capacity = row[13],
+                        vne = row[14],
+                        cruise_speed = row[15],
+                        production_years = row[16],
+                        link_1 = row[17],
+                        vehicle_notes = row[18],
                     )
-                    
+
             obj.activated = True
             obj.save()
 
