@@ -1,8 +1,8 @@
 import base64
 from io import BytesIO
-from django_pandas.io import read_frame
 
 import matplotlib.pyplot as plt
+from django_pandas.io import read_frame
 # import seaborn as sns
 from matplotlib.text import get_rotation
 

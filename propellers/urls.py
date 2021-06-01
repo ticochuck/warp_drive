@@ -1,6 +1,6 @@
 from django.urls import path
 
-from csvs.views import upload_engines, upload_vehicles, upload_propellers
+from csvs.views import upload_engines, upload_propellers, upload_vehicles
 
 from .views import (EnginePageView, PropellerPageView, VehiclePageView,
                     database_page, home, overall_stats, search)
