@@ -4,15 +4,15 @@ from django.shortcuts import render
 
 from propellers.models import Engine, Propeller, Vehicle
 
-from .forms import CsvModelForm, EngineCsvModelForm, PropellerCsvModelForm
+from .forms import VehicleCsvModelForm, EngineCsvModelForm, PropellerCsvModelForm
 from .models import Csv
 
 
 def upload_vehicles(request):
-    form = CsvModelForm(request.POST or None, request.FILES or None)
+    form = VehicleCsvModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-        form = CsvModelForm()
+        form = VehicleCsvModelForm()
         obj = Csv.objects.get(activated=False)
 
         #open and read csv file
